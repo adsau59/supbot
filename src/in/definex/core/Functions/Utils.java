@@ -3,6 +3,9 @@ package in.definex.core.Functions;
 import in.definex.core.String.Strings;
 
 /**
+ * Utils
+ * static function used by other classes to make the code a little cleaner
+ *
  * Created by adam_ on 30-11-2017.
  */
 public class Utils {

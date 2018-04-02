@@ -1,10 +1,11 @@
 package in.definex.core.Functions;
 
 import in.definex.core.Action.ActionManager;
-import in.definex.core.Action.SendMessageAction;
+import in.definex.core.Action.Core.SendMessageAction;
 import in.definex.core.ChatGroup;
 import in.definex.core.ChatItem;
 import in.definex.core.Client;
+import in.definex.core.Feature.CommandAndArgs;
 import in.definex.core.Feature.FeatureManager;
 import in.definex.core.String.Strings;
 import in.definex.core.String.XPaths;
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * ActionTaskFunctions
+ * static function used by other classes to make the code a little cleaner
+ *
  * Created by adam_ on 02-12-2017.
  */
 public class ActionTaskFunctions {

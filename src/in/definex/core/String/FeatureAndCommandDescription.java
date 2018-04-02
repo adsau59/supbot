@@ -14,6 +14,9 @@ import in.definex.core.Feature.Math.MathFeature;
 import in.definex.core.Feature.Math.SolveCommand;
 
 /**
+ * FeatureAndCommandDescription
+ * response strings for helper command
+ *
  * Created by adam_ on 04-12-2017.
  */
 public class FeatureAndCommandDescription {

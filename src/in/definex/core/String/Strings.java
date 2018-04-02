@@ -3,6 +3,9 @@ package in.definex.core.String;
 import in.definex.core.Feature.Help.HelpCommandCommand;
 
 /**
+ * Strings
+ * response strings for commands
+ *
  * Created by adam_ on 30-11-2017.
  */
 public class Strings {

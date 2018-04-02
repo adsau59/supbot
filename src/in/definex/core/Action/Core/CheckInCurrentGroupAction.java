@@ -1,7 +1,10 @@
-package in.definex.core.Action;
+package in.definex.core.Action.Core;
 
+import in.definex.core.Action.Action;
+import in.definex.core.Action.ActionManager;
 import in.definex.core.ChatItem;
 import in.definex.core.Client;
+import in.definex.core.Console.Log;
 import in.definex.core.Feature.FeatureManager;
 import in.definex.core.Functions.ActionTaskFunctions;
 import in.definex.core.Functions.BubbleFunctions;
@@ -35,7 +38,7 @@ public class CheckInCurrentGroupAction extends Action {
         chatGroup = actionManager.getActiveChat();
 
         if(chatGroup == null){
-            System.out.println("No current chat open");
+            Log.m("No current chat open");
             return;
         }
 

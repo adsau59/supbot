@@ -1,5 +1,7 @@
-package in.definex.core.Action;
+package in.definex.core.Action.Core;
 
+import in.definex.core.Action.Action;
+import in.definex.core.Action.ActionManager;
 import in.definex.core.ChatGroup;
 import in.definex.core.ChatGroupsManager;
 import in.definex.core.Feature.FeatureManager;
@@ -30,11 +32,14 @@ public class CheckOtherGroupForNewAction extends Action {
     @Override
     public void task() {
 
+        //xpath search for new chats in other groups (group that is not currently selected
         List<WebElement> newChats = driver.findElements(By.xpath(XPaths.newChatGroup));
 
         for(WebElement element:newChats) {
+            //getting name from html and searching for it in database for id, then
             ChatGroup newChatGroup = chatGroupsManager.findGroupById(Utils.chatGroupNameToUID(element.getText()));
 
+            //if id is found add action to actionmanager
             if(newChatGroup != null) {
                 CheckInNewGroupAction checkInNewGroupAction = new CheckInNewGroupAction(actionManager, newChatGroup, driver, featureManager);
                 actionManager.add(checkInNewGroupAction);

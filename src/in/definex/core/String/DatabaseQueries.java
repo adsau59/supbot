@@ -1,6 +1,9 @@
 package in.definex.core.String;
 
 /**
+ * DatabaseQuries
+ * String quires used by Database Manager
+ *
  * Created by adam_ on 03-12-2017.
  */
 public class DatabaseQueries {

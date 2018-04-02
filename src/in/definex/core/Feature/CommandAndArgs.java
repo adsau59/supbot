@@ -1,10 +1,13 @@
-package in.definex.core.Functions;
+package in.definex.core.Feature;
 
 import in.definex.core.String.Strings;
 
 import java.util.Arrays;
 
 /**
+ * CommandAndArgs
+ * wrapper class for Command and arguments used by feature and command
+ *
  * Created by adam_ on 01-12-2017.
  */
 public class CommandAndArgs {
@@ -16,6 +19,11 @@ public class CommandAndArgs {
         this.args = args;
     }
 
+    /**
+     * Splits text to command and arguments
+     * @param text text to be converted to CommandAndArgs
+     * @return CommandAndArgs object
+     */
     public static CommandAndArgs Split(String text){
 
         String rhs = text.split(Strings.commandPrefix)[1];

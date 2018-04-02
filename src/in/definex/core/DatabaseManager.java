@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Database Manger
+ * Abstracts database commands
+ *
  * Created by adam_ on 03-12-2017.
  */
 public class DatabaseManager {

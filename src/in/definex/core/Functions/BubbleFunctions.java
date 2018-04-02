@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
+ * BubbleFunctions
+ * static function used by other classes to make the code a little cleaner
+
  * Created by adam_ on 30-11-2017.
  */
 public class BubbleFunctions {

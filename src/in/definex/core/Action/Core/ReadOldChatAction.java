@@ -1,12 +1,11 @@
 package in.definex.core.Action.Core;
 
 import in.definex.core.Action.Action;
-import in.definex.core.Action.ActionManager;
-import in.definex.core.ChatGroup;
+import in.definex.core.Bot;
+import in.definex.core.ChatSystem.ChatGroup;
 import in.definex.core.Functions.ActionTaskFunctions;
 import in.definex.core.String.XPaths;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -17,20 +16,17 @@ import java.util.List;
 public class ReadOldChatAction extends Action {
 
 
-    private WebDriver webDriver;
-
-    public ReadOldChatAction(ActionManager actionManager, ChatGroup chatGroup, WebDriver webDriver) {
-        super(actionManager, chatGroup);
-        this.webDriver = webDriver;
+    public ReadOldChatAction(ChatGroup chatGroup) {
+        super(chatGroup);
     }
 
     @Override
     public void task() {
 
         //chatGroup.getChatWebElement().click();
-        actionManager.gotoGroup(chatGroup);
+        Bot.getActionManager().gotoGroup(chatGroup);
 
-        List<WebElement> bubbles =  webDriver.findElements(By.xpath(XPaths.inMessageBubbles));
+        List<WebElement> bubbles =  Bot.getWebDriver().findElements(By.xpath(XPaths.inMessageBubbles));
         ActionTaskFunctions.resetAndPutChatInGroupChat(bubbles, chatGroup);
 
 

@@ -1,4 +1,6 @@
-package in.definex.core;
+package in.definex.core.ChatSystem;
+
+import in.definex.core.Functions.DatabaseManager;
 
 import java.util.List;
 

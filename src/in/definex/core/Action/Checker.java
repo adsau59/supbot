@@ -1,4 +1,4 @@
-package in.definex.core;
+package in.definex.core.Action;
 
 import in.definex.core.Action.Action;
 
@@ -18,7 +18,7 @@ public class Checker {
     /**
      * Max number of checkers, initialized in the constructor
      */
-    private final int maxCheckingActions;
+    private int maxCheckingActions;
     /**
      * id of the current checker action
      */
@@ -54,6 +54,7 @@ public class Checker {
      */
     public void addCheckers(Action... actions){
         Collections.addAll(this.checkerActions, actions);
+        maxCheckingActions = checkerActions.size();
     }
 
     /**

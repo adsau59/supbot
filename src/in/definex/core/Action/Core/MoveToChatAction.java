@@ -1,8 +1,8 @@
 package in.definex.core.Action.Core;
 
 import in.definex.core.Action.Action;
-import in.definex.core.Action.ActionManager;
-import in.definex.core.ChatGroup;
+import in.definex.core.Bot;
+import in.definex.core.ChatSystem.ChatGroup;
 
 
 /**
@@ -11,13 +11,13 @@ import in.definex.core.ChatGroup;
 public class MoveToChatAction extends Action {
 
 
-    MoveToChatAction(ActionManager actionManager, ChatGroup chatGroup) {
-        super(actionManager, chatGroup);
+    MoveToChatAction(ChatGroup chatGroup) {
+        super(chatGroup);
     }
 
 
     @Override
     public void task() {
-        actionManager.gotoGroup(chatGroup);
+        Bot.getActionManager().gotoGroup(chatGroup);
     }
 }

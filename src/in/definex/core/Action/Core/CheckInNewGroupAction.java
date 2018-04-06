@@ -1,15 +1,13 @@
 package in.definex.core.Action.Core;
 
 import in.definex.core.Action.Action;
-import in.definex.core.Action.ActionManager;
-import in.definex.core.ChatGroup;
-import in.definex.core.Client;
-import in.definex.core.Feature.FeatureManager;
+import in.definex.core.Bot;
+import in.definex.core.ChatSystem.ChatGroup;
+import in.definex.core.ChatSystem.Client;
 import in.definex.core.Functions.ActionTaskFunctions;
 import in.definex.core.Functions.BubbleFunctions;
 import in.definex.core.String.XPaths;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -24,22 +22,17 @@ import java.util.List;
 
 public class CheckInNewGroupAction extends Action {
 
-    WebDriver driver;
-    FeatureManager featureManager;
 
-
-    CheckInNewGroupAction(ActionManager actionManager, ChatGroup chatGroup, WebDriver driver, FeatureManager featureManager) {
-        super(actionManager, chatGroup);
-        this.driver = driver;
-        this.featureManager = featureManager;
+    CheckInNewGroupAction(ChatGroup chatGroup) {
+        super(chatGroup);
     }
 
     @Override
     public void task() {
 
-        actionManager.gotoGroup(chatGroup);
+        Bot.getActionManager().gotoGroup(chatGroup);
 
-        List<WebElement> newBubbles = driver.findElements(By.xpath(XPaths.newChatBubbles));
+        List<WebElement> newBubbles = Bot.getWebDriver().findElements(By.xpath(XPaths.newChatBubbles));
 
         for(WebElement element:newBubbles) {
 
@@ -55,10 +48,10 @@ public class CheckInNewGroupAction extends Action {
                 client = Client.createTempAccount(clientName, chatGroup.getGroupId());
             }
 
-            ActionTaskFunctions.proccessBubbleThenProcessCommand(element, client, chatGroup, featureManager, actionManager, driver);
+            ActionTaskFunctions.proccessBubbleThenProcessCommand(element, client, chatGroup);
         }
 
-        List<WebElement> allBubbles = driver.findElements(By.xpath(XPaths.inMessageBubbles));
+        List<WebElement> allBubbles = Bot.getWebDriver().findElements(By.xpath(XPaths.inMessageBubbles));
         ActionTaskFunctions.resetAndPutChatInGroupChat(allBubbles, chatGroup);
 
     }

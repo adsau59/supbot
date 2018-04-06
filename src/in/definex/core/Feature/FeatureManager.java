@@ -48,6 +48,16 @@ public class FeatureManager {
         return null;
     }
 
+    public List<Feature> getCoreFeatures(){
+        List<Feature> features = new ArrayList<>();
+
+        features.add(findFeatureByName("Accounts"));
+        features.add(findFeatureByName("GroupConfig"));
+        features.add(findFeatureByName("Help"));
+
+        return features;
+    }
+
     /**
      * Find feature by its name
      * @param name name of the feature to be returned

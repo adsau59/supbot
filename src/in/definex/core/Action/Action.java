@@ -1,7 +1,8 @@
 package in.definex.core.Action;
 
 import in.definex.core.Action.Core.CompleteActionCallback;
-import in.definex.core.ChatGroup;
+import in.definex.core.Bot;
+import in.definex.core.ChatSystem.ChatGroup;
 import in.definex.core.Console.Log;
 
 /**
@@ -15,17 +16,13 @@ public abstract class Action {
 
     protected ChatGroup chatGroup;
     private CompleteActionCallback completeActionCallback;
-    protected ActionManager actionManager;
 
     /**
      * Constructor
-     *
-     * @param actionManager ActionManager
      * @param chatGroup ChatGroup the action is referred to set null if you dont need
      */
-    protected Action(ActionManager actionManager, ChatGroup chatGroup){
+    protected Action(ChatGroup chatGroup){
         this.chatGroup = chatGroup;
-        this.actionManager = actionManager;
         completeActionCallback = () -> {};
     }
 
@@ -45,7 +42,7 @@ public abstract class Action {
     public final void perform(){
         Log.m(this.getClass().getSimpleName() + " started");
         task();
-        actionManager.finishedWork();
+        Bot.getActionManager().finishedWork();
         completeActionCallback.callback();
         Log.m(this.getClass().getSimpleName() + " ended");
 

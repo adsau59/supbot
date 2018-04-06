@@ -1,16 +1,14 @@
 package in.definex.core.Action.Core;
 
 import in.definex.core.Action.Action;
-import in.definex.core.Action.ActionManager;
-import in.definex.core.ChatItem;
-import in.definex.core.Client;
+import in.definex.core.Bot;
+import in.definex.core.ChatSystem.ChatItem;
+import in.definex.core.ChatSystem.Client;
 import in.definex.core.Console.Log;
-import in.definex.core.Feature.FeatureManager;
 import in.definex.core.Functions.ActionTaskFunctions;
 import in.definex.core.Functions.BubbleFunctions;
 import in.definex.core.String.XPaths;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -20,29 +18,23 @@ import java.util.List;
  */
 public class CheckInCurrentGroupAction extends Action {
 
-    private WebDriver driver;
-    private FeatureManager featureManager;
-
 
     //chatgroup will be null if you want to check in the current chat
-    public CheckInCurrentGroupAction(ActionManager actionManager, WebDriver driver, FeatureManager featureManager) {
-        super(actionManager, null);
-
-        this.driver = driver;
-        this.featureManager = featureManager;
+    public CheckInCurrentGroupAction() {
+        super(null);
     }
 
     @Override
     public void task() {
 
-        chatGroup = actionManager.getActiveChat();
+        chatGroup = Bot.getActionManager().getActiveChat();
 
         if(chatGroup == null){
             Log.m("No current chat open");
             return;
         }
 
-        List<WebElement> bubbles = driver.findElements(By.xpath(XPaths.inMessageBubbles));
+        List<WebElement> bubbles = Bot.getWebDriver().findElements(By.xpath(XPaths.inMessageBubbles));
 
         if(bubbles.size() > chatGroup.getChatItemList().size()){
 
@@ -70,7 +62,7 @@ public class CheckInCurrentGroupAction extends Action {
                         bubbles.get(i)
                 ));
 
-                ActionTaskFunctions.proccessBubbleThenProcessCommand(bubbles.get(bubbleIndex), client, chatGroup, featureManager, actionManager, driver);
+                ActionTaskFunctions.proccessBubbleThenProcessCommand(bubbles.get(bubbleIndex), client, chatGroup);
 
             }
 

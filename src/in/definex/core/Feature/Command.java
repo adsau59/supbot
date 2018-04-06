@@ -1,13 +1,13 @@
 package in.definex.core.Feature;
 
-import in.definex.core.Action.ActionManager;
 import in.definex.core.Action.Core.SendMessageAction;
-import in.definex.core.ChatGroup;
-import in.definex.core.Client;
+import in.definex.core.Bot;
+import in.definex.core.ChatSystem.ChatGroup;
+import in.definex.core.ChatSystem.Client;
+import in.definex.core.Console.Log;
 import in.definex.core.String.Strings;
-import org.openqa.selenium.WebDriver;
 
-import in.definex.core.Client.Role;
+import in.definex.core.ChatSystem.Client.Role;
 
 /**
  * Command
@@ -19,27 +19,21 @@ import in.definex.core.Client.Role;
  */
 public abstract class Command {
 
-    private ActionManager actionManager;
     private String keyword;
     private int noOfArgs; //-1 for variable arguments
     private Role minRole;
-    private WebDriver driver;
 
     /**
      * Constructor
      *
-     * @param actionManager ActionManager
-     * @param driver Selenium Web Driver
      * @param keyword keyword to be used by the client in chat
      * @param noOfArgs number of aruments to be used (-1 for variable noOfArguments)
      * @param minRole minimum role of the client to use the command
      */
-    public Command(ActionManager actionManager, WebDriver driver, String keyword, int noOfArgs, Role minRole) {
-        this.actionManager = actionManager;
+    public Command(String keyword, int noOfArgs, Role minRole) {
         this.keyword = keyword;
         this.noOfArgs = noOfArgs;
         this.minRole = minRole;
-        this.driver = driver;
     }
 
     /**
@@ -88,8 +82,8 @@ public abstract class Command {
      * @param args arguments used by the client
      */
     public void proccess(ChatGroup chatGroup, Client client, String[] args){
-        System.out.println("Using Command: "+this.getClass().getSimpleName());
-        actionManager.add(new SendMessageAction(actionManager, chatGroup, driver, checkAndCompute(client, args)));
+        Log.d("Using Command",this.getClass().getSimpleName());
+        Bot.getActionManager().add(new SendMessageAction(chatGroup, checkAndCompute(client, args)));
     }
 
     public String getKeyword() {

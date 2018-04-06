@@ -1,16 +1,15 @@
 package in.definex.core.Functions;
 
-import in.definex.core.Action.ActionManager;
 import in.definex.core.Action.Core.SendMessageAction;
-import in.definex.core.ChatGroup;
-import in.definex.core.ChatItem;
-import in.definex.core.Client;
+import in.definex.core.Bot;
+import in.definex.core.ChatSystem.ChatGroup;
+import in.definex.core.ChatSystem.ChatItem;
+import in.definex.core.ChatSystem.Client;
 import in.definex.core.Feature.CommandAndArgs;
 import in.definex.core.Feature.FeatureManager;
 import in.definex.core.String.Strings;
 import in.definex.core.String.XPaths;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class ActionTaskFunctions {
         }
     }
 
-    public static void proccessBubbleThenProcessCommand(WebElement bubble, Client client, ChatGroup chatGroup, FeatureManager featureManager, ActionManager actionManager, WebDriver driver){
+    public static void proccessBubbleThenProcessCommand(WebElement bubble, Client client, ChatGroup chatGroup){
 
         //todo check if string then process (in another thread)
         String text = BubbleFunctions.getTextFromBubble(bubble);
@@ -64,12 +63,12 @@ public class ActionTaskFunctions {
 
             commandAndArgs.args = newArgs.toArray(new String[newArgs.size()]);
 
-            FeatureManager.FeatureAndCommand featureAndCommand = featureManager.findFeatureByCommandKeyword(commandAndArgs.cmd);
+            FeatureManager.FeatureAndCommand featureAndCommand = Bot.getFeatureManager().findFeatureByCommandKeyword(commandAndArgs.cmd);
 
             if(featureAndCommand == null)
-                actionManager.add(new SendMessageAction(actionManager, chatGroup, driver, Strings.commandDoesntExists));
+                Bot.getActionManager().add(new SendMessageAction(chatGroup, Strings.commandDoesntExists));
             else if(!chatGroup.hasFeature(featureAndCommand.feature))
-                actionManager.add(new SendMessageAction(actionManager, chatGroup, driver, Strings.commandNotAllowedInThisGroup));
+                Bot.getActionManager().add(new SendMessageAction(chatGroup, Strings.commandNotAllowedInThisGroup));
             else
                 featureAndCommand.command.proccess(chatGroup, client,commandAndArgs.args);
         }

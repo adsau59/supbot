@@ -1,6 +1,8 @@
-package in.definex.core;
+package in.definex.core.Functions;
 
 
+import in.definex.core.ChatSystem.ChatGroup;
+import in.definex.core.ChatSystem.Client;
 import in.definex.core.Feature.Feature;
 import in.definex.core.Feature.FeatureManager;
 import in.definex.core.String.DatabaseQueries;
@@ -197,8 +199,7 @@ public class DatabaseManager {
 
                 chatGroups.add(new ChatGroup(
                         rs.getString(DatabaseQueries.groupUID),
-                        features,
-                        driver
+                        features
 
                 ));
 
@@ -209,6 +210,21 @@ public class DatabaseManager {
         }
 
         return chatGroups;
+
+    }
+
+    public static void deleteChatGroup(String gid){
+
+
+        try(Connection conn = connect();
+            PreparedStatement pstm = conn.prepareStatement(DatabaseQueries.groupDelete)) {
+
+            pstm.setString(1,gid);
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -228,5 +244,6 @@ public class DatabaseManager {
         }
 
     }
+
 
 }

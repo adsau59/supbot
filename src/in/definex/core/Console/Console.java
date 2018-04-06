@@ -61,9 +61,11 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
 
         while(!looper.isQuit()){
-            System.out.println("?");
+            System.out.print("?");
             String[] command = scanner.nextLine().split(" ");
 
+
+            //TODO crashes if doesnt have the specified command
             //recognize command and sends it for processing
             String result = consoleCommandManager.getConsoleCommandByKeyword(command[0]).runCommand(Arrays.copyOfRange(command, 1, command.length));
 

@@ -1,9 +1,10 @@
-package in.definex.core;
+package in.definex.core.ChatSystem;
 
+import in.definex.core.Bot;
+import in.definex.core.Functions.DatabaseManager;
 import in.definex.core.Feature.Feature;
 import in.definex.core.String.XPaths;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -30,13 +31,11 @@ public class ChatGroup {
      * Constructor
      *
      * @param groupId id of the group
-     * @param myFeatures list of features allowed
-     * @param driver selenium web driver
      */
-    public ChatGroup(String groupId, List<Feature> myFeatures, WebDriver driver) {
+    public ChatGroup(String groupId, List<Feature> myFeatures) {
         this.chatItemList = new ArrayList<>();
         this.groupId = groupId;
-        this.chatWebElement = driver.findElement(By.xpath(XPaths.getGroupNameXPath(groupId)));
+        this.chatWebElement = Bot.getWebDriver().findElement(By.xpath(XPaths.getGroupNameXPath(groupId)));
         this.myFeatures = myFeatures;
     }
 
@@ -45,10 +44,9 @@ public class ChatGroup {
      * ChatGroup with no features
      *
      * @param groupId id of the group
-     * @param driver selenium web driver
      */
-    public ChatGroup(String groupId, WebDriver driver){
-        this(groupId, new ArrayList<>(), driver);
+    public ChatGroup(String groupId){
+        this(groupId, new ArrayList<>());
     }
 
     /**

@@ -11,21 +11,39 @@ public class Log {
     /**
      * set to false to hide all loggin messages
      */
-    public static boolean Debug = true;
+    public static boolean Debug = false;
 
-    public static void d(String type, Object obj){
+    /**
+     * Print in form "type: thing"
+     *
+     * @param type first half
+     * @param thing second half
+     */
+    public static void d(String type, Object thing){
         if(!Debug)
             return;
 
-        System.out.println(type+": "+obj);
+        System.out.println(type+": "+thing);
     }
 
+    /**
+     * Announcement log
+     * Prints in form "************* msg *************"
+     *
+     * @param msg string to log
+     */
     public static void a(String msg){
         if(!Debug)
             return;
 
         System.out.println("*********** "+msg+" *************");
     }
+
+    /**
+     * Simply logs
+     *
+     * @param m string to log
+     */
 
     public static void m(String m){
         if(!Debug)

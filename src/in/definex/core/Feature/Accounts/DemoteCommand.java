@@ -1,14 +1,12 @@
 package in.definex.core.Feature.Accounts;
 
-import in.definex.core.Action.ActionManager;
-import in.definex.core.Client;
+import in.definex.core.ChatSystem.Client;
 import in.definex.core.Feature.Command;
 import in.definex.core.String.FeatureAndCommandDescription;
 import in.definex.core.String.Strings;
-import org.openqa.selenium.WebDriver;
 
-import static in.definex.core.Client.Role.CoAdmin;
-import static in.definex.core.Client.Role.SuperAdmin;
+import static in.definex.core.ChatSystem.Client.Role.CoAdmin;
+import static in.definex.core.ChatSystem.Client.Role.SuperAdmin;
 
 /**
  * Created by adam_ on 04-12-2017.
@@ -17,8 +15,8 @@ public class DemoteCommand extends Command {
 
     public static final String name = "demote";
 
-    public DemoteCommand(ActionManager actionManager, WebDriver driver) {
-        super(actionManager, driver, name, 1, Client.Role.CoAdmin);
+    public DemoteCommand() {
+        super(name, 1, Client.Role.CoAdmin);
     }
 
     @Override

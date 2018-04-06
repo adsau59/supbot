@@ -1,7 +1,7 @@
-package in.definex.core;
+package in.definex.core.ChatSystem;
 
-import in.definex.core.Feature.FeatureManager;
-import org.openqa.selenium.WebDriver;
+import in.definex.core.Bot;
+import in.definex.core.Functions.DatabaseManager;
 
 import java.util.List;
 
@@ -37,11 +37,9 @@ public class ChatGroupsManager {
 
     /**
      * Loads the Chat Groups from the database to chatGroupList List
-     * @param featureManager Feature Manager
-     * @param driver Selenium Webdriver
      */
-    public void loadGroups(FeatureManager featureManager, WebDriver driver){
-        this.chatGroupList = DatabaseManager.getGroups(featureManager, driver);
+    public void loadGroups(){
+        this.chatGroupList = DatabaseManager.getGroups(Bot.getFeatureManager(), Bot.getWebDriver());
     }
 
     /**
@@ -51,6 +49,12 @@ public class ChatGroupsManager {
     public void add(ChatGroup chatGroups){
         chatGroupList.add(chatGroups);
         DatabaseManager.saveGroup(chatGroups);
+    }
+
+
+    public void remove(ChatGroup chatGroup){
+        chatGroupList.remove(chatGroup);
+        DatabaseManager.deleteChatGroup(chatGroup.getGroupId());
     }
 
     /**

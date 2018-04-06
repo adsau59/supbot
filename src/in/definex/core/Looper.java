@@ -1,9 +1,13 @@
 package in.definex.core;
 
 import in.definex.core.Action.ActionManager;
+import in.definex.core.Action.Checker;
 import in.definex.core.Action.Core.CheckInCurrentGroupAction;
 import in.definex.core.Action.Core.CheckOtherGroupForNewAction;
+import in.definex.core.ChatSystem.ChatGroupsManager;
 import in.definex.core.Console.Console;
+import in.definex.core.Console.Core.LogCC;
+import in.definex.core.Console.Core.GroupCC;
 import in.definex.core.Console.Log;
 import in.definex.core.Console.Core.QuitCC;
 import in.definex.core.Feature.Accounts.AccountsFeature;
@@ -28,11 +32,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class Looper {
 
 
-    private WebDriver driver;
-    private ActionManager actionManager;
-    private Checker checker;
+
     private ExtraLooperFunctions extraLooperFunctions;
-    private Console console;
     private Thread checkerAndActionThread;
     private boolean quit = false;
 
@@ -59,8 +60,19 @@ public class Looper {
     public Looper(ExtraLooperFunctions extraLooperFunctions) {
         this.extraLooperFunctions = extraLooperFunctions;
 
-        this.driver = new ChromeDriver();
-        this.driver.get("http://web.whatsapp.com/");
+
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://web.whatsapp.com/");
+
+        ActionManager actionManager = new ActionManager();
+        Console console = new Console(this);
+        FeatureManager featureManager = new FeatureManager();
+        ChatGroupsManager chatGroupsManager = new ChatGroupsManager();
+        Checker checker = new Checker(
+                () -> Log.a("RESETTING CHECKERS")
+        );
+
+        Bot.CreateBot(driver, actionManager, checker, featureManager, console, chatGroupsManager, this);
 
         checkerAndActionThread = new Thread("CheckerActionThread"){
             @Override
@@ -77,51 +89,43 @@ public class Looper {
      *
      * Ran inside start function
      */
+
     private void init(){
-
-        actionManager = new ActionManager();
-        console = new Console(this);
-
-        FeatureManager featureManager = new FeatureManager();
-        ChatGroupsManager chatGroupsManager = new ChatGroupsManager();
 
 
         //core features
-        featureManager.addFeature(
-                new MathFeature(actionManager,driver),
-                new HelpFeature(actionManager, driver, chatGroupsManager, featureManager),
-                new GroupConfigFeature(actionManager, driver, featureManager, chatGroupsManager),
-                new AccountsFeature(actionManager, driver)
+        Bot.getFeatureManager().addFeature(
+                new MathFeature(),
+                new HelpFeature(),
+                new GroupConfigFeature(),
+                new AccountsFeature()
         );
-        extraLooperFunctions.addMoreFeatures(actionManager,featureManager, chatGroupsManager);
-
-
-        chatGroupsManager.loadGroups(featureManager, driver);
+        Bot.getChatGroupsManager().loadGroups();
 
 
         //core checkers
-        checker = new Checker(
-                () -> Log.a("RESETTING CHECKERS"),
-                new CheckInCurrentGroupAction(actionManager, driver, featureManager),
-                new CheckOtherGroupForNewAction(actionManager, driver, chatGroupsManager, featureManager)
+        Bot.getChecker().addCheckers(
+                new CheckInCurrentGroupAction(),
+                new CheckOtherGroupForNewAction()
         );
-        extraLooperFunctions.addMoreCheckers(checker,actionManager,featureManager,chatGroupsManager);
-
         //coreConsoleCommands
-        console.getConsoleCommandManager().add(
-            new QuitCC(this)
+        Bot.getConsole().getConsoleCommandManager().add(
+            new QuitCC(),
+                new GroupCC(),
+                new LogCC()
         );
-        extraLooperFunctions.addMoreConsoleCommands(console);
+
+        extraLooperFunctions.addInits();
     }
 
     /***
      * Loop ran by checkerAndActionThread
      */
     private void loop(){
-        if(!actionManager.hasPendingWork())
-            actionManager.add(checker.getNextChecker());
+        if(!Bot.getActionManager().hasPendingWork())
+            Bot.getActionManager().add(Bot.getChecker().getNextChecker());
 
-        actionManager.popAndPerform();
+        Bot.getActionManager().popAndPerform();
 
         Utils.waitFor(500);
     }
@@ -136,7 +140,7 @@ public class Looper {
      */
     public void start(){
         System.out.println("Waiting for Whatsapp web to initialize.");
-        while (driver.findElements(By.xpath(XPaths.autoStartReady)).size() == 0);
+        while (Bot.getWebDriver().findElements(By.xpath(XPaths.autoStartReady)).size() == 0);
         Utils.waitFor(1000);
 
         System.out.println("Program starting.");
@@ -144,13 +148,13 @@ public class Looper {
         init();
 
         checkerAndActionThread.start();
-        console.getMyThread().start();
+        Bot.getConsole().getMyThread().start();
 
 
         //todo implement way to break for loop
         try {
             checkerAndActionThread.join();
-            console.getMyThread().join();
+            Bot.getConsole().getMyThread().join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -161,9 +165,7 @@ public class Looper {
      * feature, check and console commands from main
      */
     public interface ExtraLooperFunctions {
-        void addMoreFeatures(ActionManager actionManager, FeatureManager featureManager, ChatGroupsManager chatGroupsManager);
-        void addMoreCheckers(Checker checker, ActionManager actionManager, FeatureManager feature, ChatGroupsManager chatGroupsManager);
-        void addMoreConsoleCommands(Console console);
+        void addInits();
     }
 
 }

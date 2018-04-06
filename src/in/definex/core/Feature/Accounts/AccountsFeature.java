@@ -13,11 +13,11 @@ public class AccountsFeature extends Feature {
 
     public static String name = "Accounts";
 
-    public AccountsFeature(ActionManager actionManager, WebDriver driver) {
+    public AccountsFeature() {
         super(name, new Command[]{
-                new RegisterCommand(actionManager, driver),
-                new PromoteCommand(actionManager, driver),
-                new DemoteCommand(actionManager, driver)
+                new RegisterCommand(),
+                new PromoteCommand(),
+                new DemoteCommand()
         });
     }
 

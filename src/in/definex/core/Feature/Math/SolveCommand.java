@@ -1,9 +1,7 @@
 package in.definex.core.Feature.Math;
 
-import in.definex.core.Action.ActionManager;
-import in.definex.core.Client;
+import in.definex.core.ChatSystem.Client;
 import in.definex.core.Feature.Command;
-import org.openqa.selenium.WebDriver;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -16,8 +14,8 @@ public class SolveCommand extends Command {
 
     public static final String name = "solve";
 
-    public SolveCommand(ActionManager actionManager, WebDriver driver) {
-        super(actionManager, driver, name, -1, Client.Role.Member);
+    public SolveCommand() {
+        super(name, -1, Client.Role.Member);
     }
 
     @Override

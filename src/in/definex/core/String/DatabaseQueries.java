@@ -43,8 +43,14 @@ public class DatabaseQueries {
     public static  final String groupSelectAll =
             "SELECT * FROM "+groupTable;
 
+    public static final String groupDelete =
+            "DELETE FROM "+groupTable+" WHERE "+groupUID+"= ?";
+
+
     public static final String groupFeatureUpdate =
             "UPDATE "+groupTable+" SET "+groupMyFeature+" = ? WHERE "+groupUID+" = ?";
+
+
 
     public static final String dropGroup = "DROP TABLE "+groupTable;
 

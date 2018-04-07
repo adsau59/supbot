@@ -151,7 +151,6 @@ public class Looper {
         Bot.getConsole().getMyThread().start();
 
 
-        //todo implement way to break for loop
         try {
             checkerAndActionThread.join();
             Bot.getConsole().getMyThread().join();

@@ -8,13 +8,25 @@ import in.definex.core.Feature.FeatureManager;
 import org.openqa.selenium.WebDriver;
 
 /**
+ * Wrapper class for all the manager class in the bot,
+ * can access the managers by using the static getter functions
+ *
+ *
  * Created by adam_ on 03-04-2018.
  */
 public class Bot {
 
     private static Bot me;
 
+    /**
+     * Selenium Web Driver
+     * Used to get web elements from the whatsapp web application
+     */
     private WebDriver webDriver;
+
+    /**
+     * Go to the class to read their description
+     */
     private ActionManager actionManager;
     private Checker checker;
     private FeatureManager featureManager;
@@ -23,7 +35,7 @@ public class Bot {
     private Looper looper;
 
 
-    public static void CreateBot(WebDriver webDriver, ActionManager actionManager, Checker checker, FeatureManager featureManager, Console console, ChatGroupsManager chatGroupsManager, Looper looper) {
+    static void CreateBot(WebDriver webDriver, ActionManager actionManager, Checker checker, FeatureManager featureManager, Console console, ChatGroupsManager chatGroupsManager, Looper looper) {
         me = new Bot();
 
         me.webDriver = webDriver;

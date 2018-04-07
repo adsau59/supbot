@@ -43,7 +43,6 @@ public class CheckInNewGroupAction extends Action {
                     chatGroup.getGroupId()
             );
 
-            //todo what if client is null
             if(client == null){
                 client = Client.createTempAccount(clientName, chatGroup.getGroupId());
             }

@@ -39,7 +39,7 @@ public class ActionTaskFunctions {
 
     public static void proccessBubbleThenProcessCommand(WebElement bubble, Client client, ChatGroup chatGroup){
 
-        //todo check if string then process (in another thread)
+        //todo process in another thread
         String text = BubbleFunctions.getTextFromBubble(bubble);
         if(Utils.isCommand(text)){
             CommandAndArgs commandAndArgs = CommandAndArgs.Split(text);

@@ -43,6 +43,10 @@ public class Client {
         return new Client(name, groupId, Role.Unregistered);
     }
 
+    public static Client getSuperClient(String groupId){
+        return new Client("ZenoSama", groupId, Role.SuperAdmin);
+    }
+
     public String getName() {
         return name;
     }
@@ -61,6 +65,10 @@ public class Client {
      * @return Client object
      */
     public static Client getClient(String name, String groupUID){
+
+        if(name == null)
+            return createTempAccount("unknown", groupUID);
+
         return DatabaseManager.getClient(name, groupUID);
     }
 

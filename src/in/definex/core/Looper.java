@@ -8,6 +8,7 @@ import in.definex.core.ChatSystem.ChatGroupsManager;
 import in.definex.core.Console.Console;
 import in.definex.core.Console.Core.LogCC;
 import in.definex.core.Console.Core.GroupCC;
+import in.definex.core.Console.Core.RunCC;
 import in.definex.core.Console.Log;
 import in.definex.core.Console.Core.QuitCC;
 import in.definex.core.Feature.Accounts.AccountsFeature;
@@ -112,7 +113,8 @@ public class Looper {
         Bot.getConsole().getConsoleCommandManager().add(
             new QuitCC(),
                 new GroupCC(),
-                new LogCC()
+                new LogCC(),
+                new RunCC()
         );
 
         extraLooperFunctions.addInits();

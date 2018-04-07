@@ -13,10 +13,15 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
+ * CheckInNewGroupAction
+ *
+ * Goto a non current chat and read new chat and process its command
+ * also reset the groupchat and refills it with new chat
+ *
+ * used when CheckOtherGroupForNewAction checker, finds new chat
+ *
  * Created by adam_ on 02-12-2017.
  *
- * Goto a indentified new chat and read new chat and process its command
- * also reset the groupchat
  */
 
 
@@ -27,6 +32,17 @@ public class CheckInNewGroupAction extends Action {
         super(chatGroup);
     }
 
+    /**
+     *
+     * Goto specified group chat
+     * get new chat bubbles (bubbles after "x new messages" sign)
+     *
+     * loop through each new bubbles
+     *      get author name and create a client, and run the bubble
+     *
+     * reset the group chat and add all the bubbles the chat has
+     *
+     */
     @Override
     public void task() {
 

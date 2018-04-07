@@ -22,6 +22,8 @@ public class BubbleFunctions {
         return bubble.findElement(By.xpath(XPaths.bubbleToText)).getText();
     }
 
+
+    //todo returning null
     public static String getAuthorNameFromBubble(WebElement bubble, List<WebElement> bubbles){
 
         for(int i = bubbles.indexOf(bubble); i>=0; i--){

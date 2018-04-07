@@ -11,6 +11,12 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
+ * CheckOtherGroupForNewAction
+ * checker action
+ *
+ * Check for new chat in other groups,
+ * if finds one, adds CheckInNewGroupAction to ActionManager
+ *
  * Created by adam_ on 02-12-2017.
  */
 public class CheckOtherGroupForNewAction extends Action {

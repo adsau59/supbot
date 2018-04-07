@@ -1,10 +1,13 @@
 package in.definex.core.ChatSystem;
 
 import in.definex.core.Bot;
+import in.definex.core.Console.Log;
 import in.definex.core.Functions.DatabaseManager;
 import in.definex.core.Feature.Feature;
+import in.definex.core.String.Strings;
 import in.definex.core.String.XPaths;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -35,7 +38,18 @@ public class ChatGroup {
     public ChatGroup(String groupId, List<Feature> myFeatures) {
         this.chatItemList = new ArrayList<>();
         this.groupId = groupId;
-        this.chatWebElement = Bot.getWebDriver().findElement(By.xpath(XPaths.getGroupNameXPath(groupId)));
+
+        try {
+            this.chatWebElement = Bot.getWebDriver().findElement(By.xpath(XPaths.getGroupNameXPath(groupId)));
+        }catch (NoSuchElementException e){
+            Log.e(String.format("Group with id: %s not found, please make sure you have a group with %s%s in the end of the group title,",
+                    groupId, Strings.commandPrefix, groupId));
+
+            if(Log.Debug){
+                e.printStackTrace();
+            }
+        }
+
         this.myFeatures = myFeatures;
     }
 

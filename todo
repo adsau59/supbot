@@ -1,0 +1,15 @@
+networking
+add action from network
+
+Image Actions
+action which downloads image
+action which uploads image
+
+scheduling
+add action at specific time
+
+natural language recognition
+
+load strings dynamically instead of static final
+
+if slow down error log if coming too fast in logging

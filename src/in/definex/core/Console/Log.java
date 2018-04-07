@@ -1,5 +1,7 @@
 package in.definex.core.Console;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 /**
  * Log
  * manages the logging system of the bot
@@ -12,6 +14,10 @@ public class Log {
      * set to false to hide all loggin messages
      */
     public static boolean Debug = false;
+
+    private final static String RED = "\u001B[31m";
+    private final static String GREEN = "\u001B[32m";
+    private final static String RESET = "\u001B[0m";
 
     /**
      * Print in form "type: thing"
@@ -50,6 +56,18 @@ public class Log {
             return;
 
         System.out.println(m);
+    }
+
+    public static void e(String error){
+        System.out.println(RED+error+RESET);
+    }
+
+    public static void s(String success){
+        System.out.println(GREEN+success+RESET);
+    }
+
+    public static void r(String reply){
+        System.out.println(reply);
     }
 
 }

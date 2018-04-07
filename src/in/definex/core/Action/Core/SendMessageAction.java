@@ -10,6 +10,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 /**
+ * SendMessageAction
+ *
+ * Action used to send message to a chat group
+ *
  * Created by adam_ on 01-12-2017.
  */
 public class SendMessageAction extends Action {

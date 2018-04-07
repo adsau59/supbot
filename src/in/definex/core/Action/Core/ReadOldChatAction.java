@@ -11,8 +11,14 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
+ * ReadOldChatAction
+ * deprecated action
+ *
+ * used to reset chats in chatgroup and fill it with old chat
+ *
  * Created by adam_ on 30-11-2017.
  */
+@Deprecated
 public class ReadOldChatAction extends Action {
 
 

@@ -26,7 +26,7 @@ public class LogCC extends ConsoleCommand {
         switch (args[0]){
             case "on":
                 Log.Debug = true;
-                return "Debug turned on";
+                return "Debug turned on\nEven though you wont be able to see the commands you type IT WILL WORK";
 
             case "off":
                 Log.Debug = false;

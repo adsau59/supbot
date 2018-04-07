@@ -14,6 +14,11 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
+ * CheckInCurrentGroupAction
+ * Checker Action
+ *
+ * checks for new chat in current group
+ *
  * Created by adam_ on 01-12-2017.
  */
 public class CheckInCurrentGroupAction extends Action {

@@ -6,6 +6,10 @@ import in.definex.core.ChatSystem.ChatGroup;
 
 
 /**
+ * MoveToChatAction
+ *
+ * used to move to a different chat
+ *
  * Created by adam_ on 30-11-2017.
  */
 public class MoveToChatAction extends Action {

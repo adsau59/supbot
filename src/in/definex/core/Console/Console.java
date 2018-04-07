@@ -61,15 +61,21 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
 
         while(!looper.isQuit()){
-            System.out.print("?");
+            System.out.print(">");
             String[] command = scanner.nextLine().split(" ");
 
 
             //TODO crashes if doesnt have the specified command
             //recognize command and sends it for processing
-            String result = consoleCommandManager.getConsoleCommandByKeyword(command[0]).runCommand(Arrays.copyOfRange(command, 1, command.length));
+            ConsoleCommand cc = consoleCommandManager.getConsoleCommandByKeyword(command[0]);
 
-            System.out.println(result);
+            if(cc == null){
+                Log.e("Console Command not found");
+            }else{
+                String result = cc.runCommand(Arrays.copyOfRange(command, 1, command.length));
+                Log.r(result);
+            }
+
         }
 
     }

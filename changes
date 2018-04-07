@@ -1,0 +1,31 @@
+dd/mm/yy
+
+7/4/18:
+    Log even if debug is off
+        Log error
+        Log reply
+
+    Added Run Console Command
+        way to run bot command from console
+        run <gid> <cmd> <args>
+
+    Fixed Errors:
+        exception in DatabaseManager.getClient when name is null
+        cause: BubbleFunction.getAuthorNameFromBubble returns null for the bubble who doesn't have author in top
+        solution: when Client.getClient is called with name = null, return a temp client instead of searching in database
+
+    added comments to core actions
+
+
+6/4/18:
+    Added Console Logging system
+    Removed all Bot manager parameters and replaced it with Bot class with static methods to get managers
+
+    Added log console command
+        turn on logging: log on
+        turn off logging: log off
+
+    Added group console command
+        show group: group show
+        add group: group add <gid>
+        remove group: group remove <gid>

@@ -4,6 +4,8 @@ import in.definex.core.Action.ActionManager;
 import in.definex.core.Action.Checker;
 import in.definex.core.ChatSystem.ChatGroupsManager;
 import in.definex.core.Console.Console;
+import in.definex.core.Database.Configuration;
+import in.definex.core.Database.DatabaseManager;
 import in.definex.core.Feature.FeatureManager;
 import org.openqa.selenium.WebDriver;
 
@@ -33,9 +35,11 @@ public class Bot {
     private Console console;
     private ChatGroupsManager chatGroupsManager;
     private Looper looper;
+    private DatabaseManager databaseManager;
+    private Configuration configuration;
 
 
-    static void CreateBot(WebDriver webDriver, ActionManager actionManager, Checker checker, FeatureManager featureManager, Console console, ChatGroupsManager chatGroupsManager, Looper looper) {
+    static void CreateBot(WebDriver webDriver, ActionManager actionManager, Checker checker, FeatureManager featureManager, Console console, ChatGroupsManager chatGroupsManager, Looper looper, DatabaseManager databaseManager, Configuration configuration) {
         me = new Bot();
 
         me.webDriver = webDriver;
@@ -45,6 +49,8 @@ public class Bot {
         me.console = console;
         me.chatGroupsManager = chatGroupsManager;
         me.looper = looper;
+        me.configuration = configuration;
+        me.databaseManager = databaseManager;
     }
 
     public static WebDriver getWebDriver() {
@@ -73,5 +79,13 @@ public class Bot {
 
     public static Looper getLooper() {
         return me.looper;
+    }
+
+    public static Configuration getConfiguration() {
+        return me.configuration;
+    }
+
+    public static DatabaseManager getDatabaseManager() {
+        return me.databaseManager;
     }
 }

@@ -1,5 +1,6 @@
 package in.definex.core.Feature.GroupConfig;
 
+import in.definex.core.Bot;
 import in.definex.core.ChatSystem.Client;
 import in.definex.core.Feature.Command;
 import in.definex.core.Feature.FeatureManager;
@@ -12,7 +13,6 @@ public class ShowAvailableFeatureCommand extends Command {
 
     public static final String name = "showallfeatures";
 
-    FeatureManager featureManager;
 
     public ShowAvailableFeatureCommand() {
         super(name, 0, Client.Role.Admin);
@@ -20,7 +20,7 @@ public class ShowAvailableFeatureCommand extends Command {
 
     @Override
     protected String compute(Client client, String[] args) {
-        return "Available features are :\n"+featureManager.getListOfFeatures();
+        return "Available features are :\n"+ Bot.getFeatureManager().getListOfFeatures();
     }
 
     @Override

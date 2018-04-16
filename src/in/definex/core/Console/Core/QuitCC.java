@@ -20,6 +20,6 @@ public class QuitCC extends ConsoleCommand {
     @Override
     protected String compute(String[] args) {
         Bot.getLooper().quit();
-        return "Quitting, Goodbye";
+        return "Quitting, Goodbye.";
     }
 }

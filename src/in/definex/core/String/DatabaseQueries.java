@@ -37,6 +37,9 @@ public class DatabaseQueries {
     public static final String groupCreateTable =
             "CREATE TABLE "+groupTable+" ("+groupUID+" VARCHAR(30) PRIMARY KEY, "+groupMyFeature+" TEXT)";
 
+    public static final String dropGroupTable =
+            "DROP TABLE "+groupTable;
+
     public static final String groupInsert =
             "INSERT INTO "+groupTable+" VALUES (?,?)";
 
@@ -49,9 +52,5 @@ public class DatabaseQueries {
 
     public static final String groupFeatureUpdate =
             "UPDATE "+groupTable+" SET "+groupMyFeature+" = ? WHERE "+groupUID+" = ?";
-
-
-
-    public static final String dropGroup = "DROP TABLE "+groupTable;
 
 }

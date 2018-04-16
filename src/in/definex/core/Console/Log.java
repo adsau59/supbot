@@ -1,6 +1,6 @@
 package in.definex.core.Console;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
+import in.definex.core.Bot;
 
 /**
  * Log
@@ -13,7 +13,7 @@ public class Log {
     /**
      * set to false to hide all loggin messages
      */
-    public static boolean Debug = false;
+    private static boolean Debug = false;
 
     private final static String RED = "\u001B[31m";
     private final static String GREEN = "\u001B[32m";
@@ -30,6 +30,26 @@ public class Log {
             return;
 
         System.out.println(type+": "+thing);
+    }
+
+    /**
+     * load debug settings from configuration
+     * run in init method in looper in the end
+     */
+    public static void init()
+    {
+        Debug = Bot.getConfiguration().GetConfig("log", false);
+    }
+
+    /**
+     * Changes the debug setting
+     * Changed using "1log on|off" command
+     *
+     * @param Debug target status
+     */
+    public static void SetDebug(boolean Debug){
+        Log.Debug = Debug;
+        Bot.getConfiguration().SaveConfig("log", Debug);
     }
 
     /**
@@ -58,14 +78,34 @@ public class Log {
         System.out.println(m);
     }
 
+    /**
+     * Used to printStackTrace only when Debug is on
+     * @param e exception to be printed
+     */
+    public static void p(Exception e){ if(Debug)e.printStackTrace();}
+
+    /**
+     * Logs error in red.
+     * logs even when Debug is false
+     * @param error error to be logged
+     */
     public static void e(String error){
         System.out.println(RED+error+RESET);
     }
 
+    /**
+     * Logs success in green.
+     * logs even when Debug is false
+     * @param success message to be logged
+     */
     public static void s(String success){
         System.out.println(GREEN+success+RESET);
     }
 
+    /**
+     * Logs even when Debug is false
+     * @param reply message to be logged
+     */
     public static void r(String reply){
         System.out.println(reply);
     }

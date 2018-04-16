@@ -29,7 +29,9 @@ public class ActionTaskFunctions {
 
             chatGroup.getChatItemList().add(
                     new ChatItem(
-                            Client.getClient(BubbleFunctions.getAuthorNameFromBubble(element, bubbles), chatGroup.getGroupId()),
+                            //todo not sure if good solution
+                            //Client.getClient(BubbleFunctions.getAuthorNameFromBubble(element, bubbles), chatGroup.getGroupId()),
+                            Client.createTempAccount("temp",chatGroup.getGroupId()),
                             BubbleFunctions.getTimeFromBubble(element),
                             element)
             );

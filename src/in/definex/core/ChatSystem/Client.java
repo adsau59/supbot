@@ -1,6 +1,7 @@
 package in.definex.core.ChatSystem;
 
-import in.definex.core.Functions.DatabaseManager;
+import in.definex.core.Bot;
+import in.definex.core.Database.Core.ClientDatabase;
 
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class Client {
         if(name == null)
             return createTempAccount("unknown", groupUID);
 
-        return DatabaseManager.getClient(name, groupUID);
+        return ClientDatabase.getClient(name, groupUID);
     }
 
     /***
@@ -79,7 +80,7 @@ public class Client {
     public boolean saveToDatabase(){
 
         if(getClient(name, groupId) == null) {
-            DatabaseManager.saveClient(this);
+            ClientDatabase.saveClient(this);
             return true;
         }
 
@@ -90,12 +91,11 @@ public class Client {
     /**
      * caches chatgroup of the client and returns it
      *
-     * @param chatGroupsManager ChatGroup Manager
      * @return chatgroup object of the client
      */
-    public ChatGroup getChatGroup(ChatGroupsManager chatGroupsManager){
+    public ChatGroup getChatGroup(){
         if(chatGroupCache == null)
-            chatGroupCache = chatGroupsManager.findGroupById(groupId);
+            chatGroupCache = Bot.getChatGroupsManager().findGroupById(groupId);
 
         return chatGroupCache;
     }
@@ -106,7 +106,7 @@ public class Client {
      */
     public void changeRole(Role role){
         this.role = role;
-        DatabaseManager.updateRole(this);
+        ClientDatabase.updateRole(this);
     }
 
     /**
@@ -117,7 +117,7 @@ public class Client {
      * @return List of clients
      */
     public static List<Client> getClientsWithRole(String groupId, Role role){
-        return DatabaseManager.getClientWithRole(groupId, role);
+        return ClientDatabase.getClientWithRole(groupId, role);
     }
 
     /**

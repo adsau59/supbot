@@ -24,7 +24,7 @@ public class XPaths {
     public static final String sendButton = "//span[contains(@data-icon,'send')]";
 
     //get the group list item with the new chat
-    public static final String newChatGroup = "//div[contains(@class,'_15G96')]/../../../../../../div[not(contains(@class,'active'))]//div[@class='_25Ooe']";
+    public static final String newChatGroup = "//div[not(contains(@class,'_1f1zm')) and contains(@class,'_2EXPL')]//div[contains(@class,'_15G96')]/../../../../../../div[not(contains(@class,'active'))]//div[@class='_25Ooe']";
     //get the chat bubbles after the "x unread messages"
     public static final String newChatBubbles = "//div[@class='_1mq8g']//following-sibling::div//div[@class='Tkt2p']";
     //get the chat bubble before ethe "x unread messages"

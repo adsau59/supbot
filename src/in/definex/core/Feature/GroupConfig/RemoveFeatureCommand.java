@@ -26,10 +26,10 @@ public class RemoveFeatureCommand extends Command {
         if(newFeature == null)
             return Strings.featureDoesntExisits;
 
-        if(!client.getChatGroup(Bot.getChatGroupsManager()).hasFeature(newFeature))
+        if(!client.getChatGroup().hasFeature(newFeature))
             return Strings.featureHasNotBeenAdded;
 
-        client.getChatGroup(Bot.getChatGroupsManager()).removeFeature(newFeature);
+        client.getChatGroup().removeFeature(newFeature);
 
         return String.format(Strings.succesffullyAddedFeature, newFeature.getName());
     }

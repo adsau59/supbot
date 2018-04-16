@@ -22,7 +22,7 @@ public class HelpCommand extends Command {
     protected String compute(Client client, String[] args) {
         String availFeatures = "";
 
-        for(Feature feature: client.getChatGroup(Bot.getChatGroupsManager()).getMyFeatures()){
+        for(Feature feature: client.getChatGroup().getMyFeatures()){
             availFeatures+=feature.getName()+"\n";
         }
 

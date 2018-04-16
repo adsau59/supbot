@@ -1,3 +1,5 @@
+ChatProcessor
+
 networking
 add action from network
 
@@ -8,8 +10,17 @@ action which uploads image
 scheduling
 add action at specific time
 
-natural language recognition
+Logging to file
 
+
+
+
+
+Later:
+natural language recognition
 load strings dynamically instead of static final
 
-if slow down error log if coming too fast in logging
+Done:
+Databse
+Configuration
+ConsoleCommands

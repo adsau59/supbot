@@ -11,6 +11,10 @@ import in.definex.core.Console.Core.GroupCC;
 import in.definex.core.Console.Core.RunCC;
 import in.definex.core.Console.Log;
 import in.definex.core.Console.Core.QuitCC;
+import in.definex.core.Database.Configuration;
+import in.definex.core.Database.Core.ChatGroupDatabase;
+import in.definex.core.Database.Core.ClientDatabase;
+import in.definex.core.Database.DatabaseManager;
 import in.definex.core.Feature.Accounts.AccountsFeature;
 import in.definex.core.Feature.FeatureManager;
 import in.definex.core.Feature.GroupConfig.GroupConfigFeature;
@@ -73,7 +77,7 @@ public class Looper {
                 () -> Log.a("RESETTING CHECKERS")
         );
 
-        Bot.CreateBot(driver, actionManager, checker, featureManager, console, chatGroupsManager, this);
+        Bot.CreateBot(driver, actionManager, checker, featureManager, console, chatGroupsManager, this,new DatabaseManager(), new Configuration());
 
         checkerAndActionThread = new Thread("CheckerActionThread"){
             @Override
@@ -101,7 +105,6 @@ public class Looper {
                 new GroupConfigFeature(),
                 new AccountsFeature()
         );
-        Bot.getChatGroupsManager().loadGroups();
 
 
         //core checkers
@@ -117,7 +120,20 @@ public class Looper {
                 new RunCC()
         );
 
-        extraLooperFunctions.addInits();
+        //core database
+        Bot.getDatabaseManager().add(
+                new ChatGroupDatabase(),
+                new ClientDatabase()
+        );
+
+        extraLooperFunctions.addThingsInBot();
+
+        //init managers
+        Bot.getDatabaseManager().init();
+        Bot.getChatGroupsManager().loadGroups();
+        Log.init();
+
+        extraLooperFunctions.moreInits();
     }
 
     /***
@@ -166,7 +182,8 @@ public class Looper {
      * feature, check and console commands from main
      */
     public interface ExtraLooperFunctions {
-        void addInits();
+        void addThingsInBot();
+        void moreInits();
     }
 
 }

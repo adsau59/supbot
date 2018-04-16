@@ -62,10 +62,10 @@ public class Console {
 
         while(!looper.isQuit()){
             System.out.print(">");
-            String[] command = scanner.nextLine().split(" ");
+            String s = scanner.nextLine();
+            String[] command = s.split(" ");
 
 
-            //TODO crashes if doesnt have the specified command
             //recognize command and sends it for processing
             ConsoleCommand cc = consoleCommandManager.getConsoleCommandByKeyword(command[0]);
 

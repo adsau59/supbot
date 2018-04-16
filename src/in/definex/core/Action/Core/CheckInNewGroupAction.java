@@ -67,6 +67,8 @@ public class CheckInNewGroupAction extends Action {
         }
 
         List<WebElement> allBubbles = Bot.getWebDriver().findElements(By.xpath(XPaths.inMessageBubbles));
+
+
         ActionTaskFunctions.resetAndPutChatInGroupChat(allBubbles, chatGroup);
 
     }

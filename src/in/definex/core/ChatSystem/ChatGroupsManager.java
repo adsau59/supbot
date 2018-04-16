@@ -1,7 +1,7 @@
 package in.definex.core.ChatSystem;
 
 import in.definex.core.Bot;
-import in.definex.core.Functions.DatabaseManager;
+import in.definex.core.Database.Core.ChatGroupDatabase;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class ChatGroupsManager {
      * Loads the Chat Groups from the database to chatGroupList List
      */
     public void loadGroups(){
-        this.chatGroupList = DatabaseManager.getGroups(Bot.getFeatureManager(), Bot.getWebDriver());
+        this.chatGroupList = ChatGroupDatabase.getGroups(Bot.getFeatureManager(), Bot.getWebDriver());
     }
 
     /**
@@ -48,13 +48,13 @@ public class ChatGroupsManager {
      */
     public void add(ChatGroup chatGroups){
         chatGroupList.add(chatGroups);
-        DatabaseManager.saveGroup(chatGroups);
+        ChatGroupDatabase.saveGroup(chatGroups);
     }
 
 
     public void remove(ChatGroup chatGroup){
         chatGroupList.remove(chatGroup);
-        DatabaseManager.deleteChatGroup(chatGroup.getGroupId());
+        ChatGroupDatabase.deleteChatGroup(chatGroup.getGroupId());
     }
 
     /**

@@ -2,7 +2,7 @@ package in.definex.core.ChatSystem;
 
 import in.definex.core.Bot;
 import in.definex.core.Console.Log;
-import in.definex.core.Functions.DatabaseManager;
+import in.definex.core.Database.Core.ChatGroupDatabase;
 import in.definex.core.Feature.Feature;
 import in.definex.core.String.Strings;
 import in.definex.core.String.XPaths;
@@ -45,9 +45,7 @@ public class ChatGroup {
             Log.e(String.format("Group with id: %s not found, please make sure you have a group with %s%s in the end of the group title,",
                     groupId, Strings.commandPrefix, groupId));
 
-            if(Log.Debug){
-                e.printStackTrace();
-            }
+            Log.p(e);
         }
 
         this.myFeatures = myFeatures;
@@ -109,7 +107,7 @@ public class ChatGroup {
      */
     public void addFeature(Feature feature){
         this.myFeatures.add(feature);
-        DatabaseManager.updateFeatures(this);
+        ChatGroupDatabase.updateFeatures(this);
     }
 
     /**
@@ -118,7 +116,7 @@ public class ChatGroup {
      */
     public void removeFeature(Feature feature){
         this.myFeatures.remove(feature);
-        DatabaseManager.updateFeatures(this);
+        ChatGroupDatabase.updateFeatures(this);
     }
 
     /**

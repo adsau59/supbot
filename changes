@@ -1,5 +1,26 @@
 dd/mm/yy
 
+16/4/18:
+    Created Database and DatabaseManager
+        to control the version of the tables in mysqlite
+
+    Created Configuration
+        save and retrieve name value pair which is saved on disk
+
+    Fixed Bug(s):
+        exception in ClientDatabase.getClient when client is not found in database
+            cause: trying to use result set even though its not pointing to anything
+            solution: return null client when result set is'nt point before first, before using the result set
+
+        CheckInNewGroupAction is called even though message comes in current group
+            cause: xpath was set to detect just the new message sign (the (1) sign) in the chat list
+            solution: updated newChatGroup XPath
+
+    Optimization(s):
+        In ActionTaskFunctions Class in resetAndPutChatInGroupChat function:
+            instead of queering database to get correct client, just use a temp client.
+
+
 7/4/18:
     Log even if debug is off
         Log error
@@ -9,10 +30,10 @@ dd/mm/yy
         way to run bot command from console
         run <gid> <cmd> <args>
 
-    Fixed Errors:
-        exception in DatabaseManager.getClient when name is null
-        cause: BubbleFunction.getAuthorNameFromBubble returns null for the bubble who doesn't have author in top
-        solution: when Client.getClient is called with name = null, return a temp client instead of searching in database
+    Fixed Bug(s):
+        exception in ClientDatabase.getClient when name is null
+            cause: BubbleFunction.getAuthorNameFromBubble returns null for the bubble who doesn't have author in top
+            solution: when Client.getClient is called with name = null, return a temp client instead of searching in database
 
     added comments to core actions
 

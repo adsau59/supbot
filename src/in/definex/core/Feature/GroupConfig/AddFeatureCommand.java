@@ -1,5 +1,6 @@
 package in.definex.core.Feature.GroupConfig;
 
+import in.definex.core.Bot;
 import in.definex.core.ChatSystem.ChatGroupsManager;
 import in.definex.core.ChatSystem.Client;
 import in.definex.core.Feature.Command;
@@ -15,8 +16,6 @@ public class AddFeatureCommand extends Command {
 
     public static final String name = "add-feature";
 
-    private FeatureManager featureManager;
-    private ChatGroupsManager chatGroupsManager;
 
     public AddFeatureCommand() {
         super(name, 1, Client.Role.CoAdmin);
@@ -25,17 +24,17 @@ public class AddFeatureCommand extends Command {
     @Override
     protected String compute(Client client, String[] args) {
 
-        Feature newFeature = featureManager.findFeatureByName(args[0]);
+        Feature newFeature = Bot.getFeatureManager().findFeatureByName(args[0]);
 
         if(newFeature == null)
             return Strings.featureDoesntExisits;
 
-        if(client.getChatGroup(chatGroupsManager).hasFeature(newFeature))
+        if(client.getChatGroup().hasFeature(newFeature))
             return Strings.featureAlreadyAdded;
 
-        client.getChatGroup(chatGroupsManager).addFeature(newFeature);
+        client.getChatGroup().addFeature(newFeature);
 
-        return String.format(Strings.successfullyRemovedFeature, newFeature.getName());
+        return String.format(Strings.succesffullyAddedFeature, newFeature.getName());
     }
 
     @Override

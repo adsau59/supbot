@@ -20,9 +20,7 @@ public class Utils {
 
     }
 
-    public static boolean isCommand(String string){
-        return string.startsWith(Strings.commandPrefix);
-    }
+
 
     public static String chatGroupNameToUID(String name){
         return name.split(Strings.titlePrefix)[1];

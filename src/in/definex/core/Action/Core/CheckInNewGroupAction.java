@@ -2,10 +2,10 @@ package in.definex.core.Action.Core;
 
 import in.definex.core.Action.Action;
 import in.definex.core.Bot;
+import in.definex.core.ChatSystem.Bubble;
 import in.definex.core.ChatSystem.ChatGroup;
 import in.definex.core.ChatSystem.Client;
 import in.definex.core.Functions.ActionTaskFunctions;
-import in.definex.core.Functions.BubbleFunctions;
 import in.definex.core.String.XPaths;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -52,18 +52,15 @@ public class CheckInNewGroupAction extends Action {
 
         for(WebElement element:newBubbles) {
 
-
-            String clientName = BubbleFunctions.getAuthorNameFromBubble(element, newBubbles);
+            Bubble bubble = new Bubble(element);
+            String clientName = bubble.getAuthor(newBubbles);
             Client client = Client.getClient(
                     clientName,
                     chatGroup.getGroupId()
             );
 
-            if(client == null){
-                client = Client.createTempAccount(clientName, chatGroup.getGroupId());
-            }
+            Bot.getChatProcessorManager().process(bubble, client);
 
-            ActionTaskFunctions.proccessBubbleThenProcessCommand(element, client, chatGroup);
         }
 
         List<WebElement> allBubbles = Bot.getWebDriver().findElements(By.xpath(XPaths.inMessageBubbles));

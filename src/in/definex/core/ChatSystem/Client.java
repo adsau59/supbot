@@ -33,6 +33,21 @@ public class Client {
         this.role = role;
     }
 
+    /**
+     * Constructor
+     *
+     * @param name name of the client in chat (can be phonenumber of saved name)
+     * @param chatGroup chatgroup object of which client belongs to
+     * @param role role of the client
+     */
+    public Client(String name, ChatGroup chatGroup, Role role){
+        this.name = name;
+        this.role = role;
+
+        this.chatGroupCache = chatGroup;
+        this.groupId = chatGroup.getGroupId();
+    }
+
     /***
      * Creates a temporary client for clients who havent registered
      *
@@ -60,6 +75,7 @@ public class Client {
 
     /***
      * Retrieves a client from the database
+     * returns a temp account if client is not found
      *
      * @param name name of the client in chat (can be phonenumber of saved name)
      * @param groupUID id of the group in which the client is
@@ -70,7 +86,13 @@ public class Client {
         if(name == null)
             return createTempAccount("unknown", groupUID);
 
-        return ClientDatabase.getClient(name, groupUID);
+        Client result = ClientDatabase.getClient(name, groupUID);
+
+        if(result == null){
+            result = Client.createTempAccount(name, groupUID);
+        }
+
+        return result;
     }
 
     /***

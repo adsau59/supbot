@@ -8,10 +8,12 @@ import java.util.List;
 
 /**
  * BubbleFunctions
+ * Deprecated, use Bubble class instead
  * static function used by other classes to make the code a little cleaner
-
+ *
  * Created by adam_ on 30-11-2017.
  */
+@Deprecated
 public class BubbleFunctions {
 
     public static String getTimeFromBubble(WebElement bubble){
@@ -22,8 +24,6 @@ public class BubbleFunctions {
         return bubble.findElement(By.xpath(XPaths.bubbleToText)).getText();
     }
 
-
-    //todo returning null
     public static String getAuthorNameFromBubble(WebElement bubble, List<WebElement> bubbles){
 
         for(int i = bubbles.indexOf(bubble); i>=0; i--){

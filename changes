@@ -1,5 +1,21 @@
 dd/mm/yy
 
+18/4/18:
+    Created Bubble
+        abstraction of selenium webelement of whatsapp chat
+
+    Created ChatProcessor and ChatProcessorManager
+        ChatProcessor processes the bubble of chat sent by a client and perform appropriate actions
+        ChatProcessorManager manages a list of ChatProcessors and executes them when process() method is called
+        To add ChatProcessor in ChatProcessorManager, Bot.getChatProcessorManager.add() can be used
+        ChatProcessor can be ran in multithread for optimization. (configured in ChatProcessor constructor)
+
+    Created CommandCP
+        Code from ActionTaskFunction.processBubbleThenProcessCommand is moved to CommandCP as ChatProcessor Abstraction
+
+    Deprecated BubbleFunctions
+        Use Bubble class instead of BubbleFunctions
+
 16/4/18:
     Created Database and DatabaseManager
         to control the version of the tables in mysqlite
@@ -19,6 +35,10 @@ dd/mm/yy
     Optimization(s):
         In ActionTaskFunctions Class in resetAndPutChatInGroupChat function:
             instead of queering database to get correct client, just use a temp client.
+
+    Initialization in Looper
+        Initialization of different components of bot is done after the init() method in looper
+        to add more initialization, ExtraLooperFunctions.moreInits can be used in while creating Looper object in main
 
 
 7/4/18:

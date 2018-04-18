@@ -3,6 +3,8 @@ package in.definex.core;
 import in.definex.core.Action.ActionManager;
 import in.definex.core.Action.Checker;
 import in.definex.core.ChatSystem.ChatGroupsManager;
+import in.definex.core.ChatSystem.ChatProcessor;
+import in.definex.core.ChatSystem.ChatProcessorManager;
 import in.definex.core.Console.Console;
 import in.definex.core.Database.Configuration;
 import in.definex.core.Database.DatabaseManager;
@@ -37,15 +39,17 @@ public class Bot {
     private Looper looper;
     private DatabaseManager databaseManager;
     private Configuration configuration;
+    private ChatProcessorManager chatProcessorManager;
 
 
-    static void CreateBot(WebDriver webDriver, ActionManager actionManager, Checker checker, FeatureManager featureManager, Console console, ChatGroupsManager chatGroupsManager, Looper looper, DatabaseManager databaseManager, Configuration configuration) {
+    static void CreateBot(WebDriver webDriver, ActionManager actionManager, Checker checker, FeatureManager featureManager, ChatProcessorManager chatProcessorManager, Console console, ChatGroupsManager chatGroupsManager, Looper looper, DatabaseManager databaseManager, Configuration configuration) {
         me = new Bot();
 
         me.webDriver = webDriver;
         me.actionManager = actionManager;
         me.checker = checker;
         me.featureManager = featureManager;
+        me.chatProcessorManager = chatProcessorManager;
         me.console = console;
         me.chatGroupsManager = chatGroupsManager;
         me.looper = looper;
@@ -63,6 +67,10 @@ public class Bot {
 
     public static Checker getChecker() {
         return me.checker;
+    }
+
+    public static ChatProcessorManager getChatProcessorManager(){
+        return me.chatProcessorManager;
     }
 
     public static FeatureManager getFeatureManager() {

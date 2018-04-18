@@ -21,6 +21,8 @@ public class Main {
 
                 //Bot.getFeatureManager().add(new YourFeature(Parameters params));
 
+                //Bot.getChatProcessorManager.add(new YourChatProcessor(Parameters params));
+
                 //Bot.getChecker().add(new YourCheckers(Parameters params));
 
                 //Bot.getConsole.add(new YourConsoleCommand(Parameters params));

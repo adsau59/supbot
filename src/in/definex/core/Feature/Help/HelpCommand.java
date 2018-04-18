@@ -1,6 +1,5 @@
 package in.definex.core.Feature.Help;
 
-import in.definex.core.Bot;
 import in.definex.core.ChatSystem.Client;
 import in.definex.core.Feature.Command;
 import in.definex.core.Feature.Feature;

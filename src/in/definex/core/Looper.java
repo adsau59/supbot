@@ -5,6 +5,8 @@ import in.definex.core.Action.Checker;
 import in.definex.core.Action.Core.CheckInCurrentGroupAction;
 import in.definex.core.Action.Core.CheckOtherGroupForNewAction;
 import in.definex.core.ChatSystem.ChatGroupsManager;
+import in.definex.core.ChatSystem.ChatProcessorManager;
+import in.definex.core.ChatSystem.Core.CommandCP;
 import in.definex.core.Console.Console;
 import in.definex.core.Console.Core.LogCC;
 import in.definex.core.Console.Core.GroupCC;
@@ -77,7 +79,7 @@ public class Looper {
                 () -> Log.a("RESETTING CHECKERS")
         );
 
-        Bot.CreateBot(driver, actionManager, checker, featureManager, console, chatGroupsManager, this,new DatabaseManager(), new Configuration());
+        Bot.CreateBot(driver, actionManager, checker, featureManager, new ChatProcessorManager(), console, chatGroupsManager, this,new DatabaseManager(), new Configuration());
 
         checkerAndActionThread = new Thread("CheckerActionThread"){
             @Override
@@ -124,6 +126,11 @@ public class Looper {
         Bot.getDatabaseManager().add(
                 new ChatGroupDatabase(),
                 new ClientDatabase()
+        );
+
+        //core ChatProcessors
+        Bot.getChatProcessorManager().add(
+                new CommandCP()
         );
 
         extraLooperFunctions.addThingsInBot();

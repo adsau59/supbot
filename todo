@@ -1,11 +1,9 @@
-ChatProcessor
-
-networking
-add action from network
-
 Image Actions
 action which downloads image
 action which uploads image
+
+networking
+add action from network
 
 scheduling
 add action at specific time
@@ -14,7 +12,8 @@ Logging to file
 
 
 
-
+Bugs:
+multiple name tagging reference
 
 Later:
 natural language recognition
@@ -24,3 +23,4 @@ Done:
 Databse
 Configuration
 ConsoleCommands
+ChatProcessor

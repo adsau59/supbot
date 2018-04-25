@@ -1,19 +1,17 @@
-Image Actions
-action which downloads image
-action which uploads image
+scheduling
+add action at specific time
 
 networking
 add action from network
-
-scheduling
-add action at specific time
 
 Logging to file
 
 
 
 Bugs:
+Going into other group, doesnt reset chat
 multiple name tagging reference
+if image is not found bot will pause
 
 Later:
 natural language recognition
@@ -24,3 +22,9 @@ Databse
 Configuration
 ConsoleCommands
 ChatProcessor
+add Checker with timeout
+
+(done but will add later externally)
+Image Actions
+action which downloads image
+action which uploads image

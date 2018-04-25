@@ -1,5 +1,28 @@
 dd/mm/yy
 
+date:
+    Created RemoteActionCall
+		RemoteActionCall enables the bot to recognize and create Action object from string,
+		The limitation of which being that all the parameters of Action to be created should have parameters only of type
+		String, Integer, Float, or Boolean, if its not it should have a static method: Object castFromString(String s);
+		which the RemoteActionCall uses to convert a string query to parameters object.
+		
+	Created ActionCallerCC (Console Command)
+		ActionCallerCC is used to call Action from the console, 
+		command must be of format: action ActionClassName param1 param2 paramN
+		to add an action to ActionCallerCC, the class of the target Action should be added into RemoteActionCall
+		
+	Created CheckerCallerCC (Console Command)
+		CheckerCallerCC is used to add Action into Checker.
+		command must be of format: checker ActionClassName param1 param2 paramN removeCheckerOnSuccess timeIntMs
+		where removeCheckerOnSuccess is of value true/false, when it is true, the action is removed from the checker if it is successful
+	
+    Fixed Bug(s):
+        processes old chat  when visiting new groups without CheckInNewGroupAction
+            cause: gotoGroup() method in ActionManager doesn't reset the chat of the group
+            fix: removed ActionTaskFunctions.resetAndPutChatInGroupChat() call from CheckInNewGroupAction and added it
+                 into gotoGroup() method in ActionManager
+
 18/4/18:
     Created Bubble
         abstraction of selenium webelement of whatsapp chat

@@ -1,21 +1,14 @@
-scheduling
-add action at specific time
-
-networking
-add action from network
-
-Logging to file
-
-
 
 Bugs:
-Going into other group, doesnt reset chat
 multiple name tagging reference
 if image is not found bot will pause
+if loading chat takes time to load, when goint to other chat, it reads all the chat as new
+actionmanager popandperform gives nosuchelement  exception
 
 Later:
-natural language recognition
+Logging to file
 load strings dynamically instead of static final
+natural language recognition
 
 Done:
 Databse
@@ -23,7 +16,11 @@ Configuration
 ConsoleCommands
 ChatProcessor
 add Checker with timeout
-
+scheduling
+add sheduletask at specific time
+networking
+add action from network
+alias
 (done but will add later externally)
 Image Actions
 action which downloads image

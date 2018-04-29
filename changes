@@ -1,6 +1,31 @@
 dd/mm/yy
 
-date:
+29/4/18:
+	Created Scheduler system
+		Scheduler system enables the bot to schedule tasks at a perticular time and date.
+		
+		ScheduleTask
+			Contians task to be exected at time.
+		Schedule
+			Object that contains task to be called and time to be scheduled,
+		ScheduleManager
+			Manages Schedules
+			use Bot.getScheduleManager().add() to add Schedule to the Bot
+	
+	Created NetworkJob system
+		NetworkJob allows the bot to call remote services.
+		
+		NetworkJob
+			creates a Request strings that is sent to the service
+			and handles the Response strings that comes from the service
+		NetworkJobManager
+			manages NetworkJob
+			creates id for the job that is created, and sends the request to the service,
+			waits for the service's response
+	
+	moved Math feature from the core project to example
+
+25/4/18:
     Created RemoteActionCall
 		RemoteActionCall enables the bot to recognize and create Action object from string,
 		The limitation of which being that all the parameters of Action to be created should have parameters only of type

@@ -31,7 +31,7 @@ public class RemoveFeatureCommand extends Command {
 
         client.getChatGroup().removeFeature(newFeature);
 
-        return String.format(Strings.succesffullyAddedFeature, newFeature.getName());
+        return String.format(Strings.successfullyRemovedFeature, newFeature.getName());
     }
 
     @Override

@@ -47,6 +47,7 @@ public class Client {
     public Client(String name, ChatGroup chatGroup, Role role){
         this.name = name;
         this.role = role;
+        this.alias = "";
 
         this.chatGroupCache = chatGroup;
         this.groupId = chatGroup.getGroupId();
@@ -64,7 +65,12 @@ public class Client {
     public Role getRole() {
         return role;
     }
-    public String getAlias()
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public String getFaceName()
     {
         if(alias.isEmpty())
             return name;
@@ -130,7 +136,7 @@ public class Client {
      */
     public boolean saveToDatabase(){
 
-        if(getClient(name, groupId) == null) {
+        if(ClientDatabase.getClient(name,groupId) == null) {
             ClientDatabase.saveClient(this);
             return true;
         }

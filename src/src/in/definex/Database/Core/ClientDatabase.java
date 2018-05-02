@@ -22,7 +22,7 @@ public class ClientDatabase extends Database {
             "CREATE TABLE "+clientTable+" ("+clientName+" VARCHAR(30), "+clientGUID+" VARCHAR(30), "+clientRole+" INT)";
 
     public static final String clientInsert =
-            "INSERT INTO "+clientTable+" VALUES (?,?,?)";
+            "INSERT INTO "+clientTable+" VALUES (?,?,?,?)";
 
     public static final String clientSelectWhere =
             "SELECT * FROM "+clientTable+" WHERE "+clientName+" = ? AND "+clientGUID+" = ?";
@@ -94,6 +94,7 @@ public class ClientDatabase extends Database {
             pstmt.setString(1,client.getName());
             pstmt.setString(2,client.getGroupId());
             pstmt.setInt(3,client.getRole().getPrestige());
+            pstmt.setString(4,client.getAlias());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

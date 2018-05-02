@@ -1,6 +1,7 @@
 
 
 Bugs:
+when a new message from other group comes, the group shifts to top which changes the webelement
 multiple name tagging reference
 if image is not found bot will pause
 if loading chat takes time to load, when goint to other chat, it reads all the chat as new
@@ -27,5 +28,7 @@ Image Actions
 action which downloads image
 action which uploads image
 
+small changes
 better command-arg splitting (qoutes)
 way to configure command prefix from api
+register bug

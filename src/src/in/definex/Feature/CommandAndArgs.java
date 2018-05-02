@@ -2,7 +2,11 @@ package in.definex.Feature;
 
 import in.definex.String.Strings;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * CommandAndArgs
@@ -27,8 +31,24 @@ public class CommandAndArgs {
     public static CommandAndArgs Split(String text){
 
         String rhs = text.split(Strings.commandPrefix)[1];
-        String[] rest = rhs.split(" ");
 
+        List<String> matchList = new ArrayList<>();
+        Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
+        Matcher regexMatcher = regex.matcher(rhs);
+        while (regexMatcher.find()) {
+            if (regexMatcher.group(1) != null) {
+                // Add double-quoted string without the quotes
+                matchList.add(regexMatcher.group(1));
+            } else if (regexMatcher.group(2) != null) {
+                // Add single-quoted string without the quotes
+                matchList.add(regexMatcher.group(2));
+            } else {
+                // Add unquoted word
+                matchList.add(regexMatcher.group());
+            }
+        }
+
+        String[] rest = matchList.toArray(new String[0]);
         return new CommandAndArgs(rest[0], Arrays.copyOfRange(rest, 1, rest.length));
 
     }

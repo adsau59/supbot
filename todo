@@ -1,4 +1,5 @@
 
+
 Bugs:
 multiple name tagging reference
 if image is not found bot will pause
@@ -25,3 +26,6 @@ alias
 Image Actions
 action which downloads image
 action which uploads image
+
+better command-arg splitting (qoutes)
+way to configure command prefix from api

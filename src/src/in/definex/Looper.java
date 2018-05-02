@@ -25,6 +25,7 @@ import in.definex.Functions.Utils;
 import in.definex.NetworkJob.NetworkJobManager;
 import in.definex.Scheduler.ScheduleDatabase;
 import in.definex.Scheduler.ScheduleManager;
+import in.definex.String.Strings;
 import in.definex.String.XPaths;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -97,7 +98,7 @@ public class Looper {
     public void start(){
         WebDriver driver;
 
-        if(!chromeProfileLoc.isEmpty()) {
+        if(chromeProfileLoc == null || !chromeProfileLoc.isEmpty()) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("user-data-dir="+chromeProfileLoc);
             driver = new ChromeDriver(options);
@@ -120,6 +121,11 @@ public class Looper {
                 new ScheduleManager(),
                 new NetworkJobManager()
         );
+        Strings.commandPrefix = Bot.getConfiguration().GetConfig("command_prefix",";;");
+        Strings.titlePrefix = Bot.getConfiguration().GetConfig("group_title_prefix", ";;");
+
+        
+
         System.out.println("Waiting for Whatsapp web to initialize.");
         while (Bot.getWebDriver().findElements(By.xpath(XPaths.autoStartReady)).size() == 0) Utils.waitFor(500);
         Utils.waitFor(1000);

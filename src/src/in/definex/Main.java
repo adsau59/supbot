@@ -1,6 +1,5 @@
 package in.definex;
 
-
 public class Main {
 
     public static void main(String[] args) {
@@ -33,7 +32,7 @@ public class Main {
                 }
 
         );
-        looper.setChromeProfileLoc("D:\\Extra\\ChromeProfile");
+        //looper.setChromeProfileLoc("D:\\Extra\\ChromeProfile");
         //Run the code to initialize components and start the bot.
         //Bot Services can only be used after looper.start()
         looper.start();

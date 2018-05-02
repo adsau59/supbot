@@ -3,15 +3,11 @@ package in.definex.String;
 import in.definex.Feature.Accounts.DemoteCommand;
 import in.definex.Feature.Accounts.PromoteCommand;
 import in.definex.Feature.Accounts.RegisterCommand;
-import in.definex.Feature.GroupConfig.AddFeatureCommand;
-import in.definex.Feature.GroupConfig.RemoveFeatureCommand;
-import in.definex.Feature.GroupConfig.RoleCommand;
-import in.definex.Feature.GroupConfig.ShowAvailableFeatureCommand;
+import in.definex.Feature.GroupConfig.*;
 import in.definex.Feature.Help.HelpCommand;
 import in.definex.Feature.Help.HelpCommandCommand;
+import in.definex.Feature.Help.HelpFeature;
 import in.definex.Feature.Help.HelpFeatureCommand;
-import in.definex.Feature.Math.MathFeature;
-import in.definex.Feature.Math.SolveCommand;
 
 /**
  * FeatureAndCommandDescription
@@ -26,10 +22,10 @@ public class FeatureAndCommandDescription {
     public static final String showAvailTemplateExample = Strings.commandPrefix+ ShowAvailableFeatureCommand.name;
     public static final String addFeatureDescription = "Add feature to the group.";
     public static final String addFeatureTemplate = Strings.commandPrefix+ AddFeatureCommand.name+" [feature_name]";
-    public static final String addFeatureExample = Strings.commandPrefix+AddFeatureCommand.name+" "+ MathFeature.name;
+    public static final String addFeatureExample = Strings.commandPrefix+AddFeatureCommand.name+" "+ GroupConfigFeature.name;
     public static final String removeFeatureDescription = "Remove feature from the group";
     public static final String removeFeatureTemplate = Strings.commandPrefix+ RemoveFeatureCommand.name+" [feature_name]";
-    public static final String removeFeatureExample = Strings.commandPrefix+RemoveFeatureCommand.name+" "+MathFeature.name;
+    public static final String removeFeatureExample = Strings.commandPrefix+RemoveFeatureCommand.name+" "+GroupConfigFeature.name;
 
     public static final String accountsDescription = "Register, Promote, Demote, Account Management for the group.";
     public static final String registerDescription = "Register group member for the group";
@@ -49,10 +45,10 @@ public class FeatureAndCommandDescription {
     public static final String helpCommandTemplateExample = Strings.commandPrefix+ HelpCommand.name;
     public static final String helpFeatureDescription = "Shows commands in the feature.";
     public static final String helpFeatureTemplate = Strings.commandPrefix+ HelpFeatureCommand.name+" [feature-name]";
-    public static final String helpFeatureExample = Strings.commandPrefix+HelpFeatureCommand.name+" "+MathFeature.name;
+    public static final String helpFeatureExample = Strings.commandPrefix+HelpFeatureCommand.name+" "+HelpFeature.name;
     public static final String helpCommandCommandDescription = "Shows description, usage and example of a command.";
     public static final String helpCommandCommandTemplate = Strings.commandPrefix+ HelpCommandCommand.name+" [command]";
-    public static final String helpCommandCommandExample = Strings.commandPrefix+HelpCommandCommand.name+" "+ SolveCommand.name;
+    public static final String helpCommandCommandExample = Strings.commandPrefix+HelpCommandCommand.name+" "+ HelpFeature.name;
 
 
 }

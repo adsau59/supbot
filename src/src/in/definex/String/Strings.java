@@ -10,8 +10,8 @@ import in.definex.Feature.Help.HelpCommandCommand;
  */
 public class Strings {
 
-    public static final String commandPrefix = ";;";
-    public static final String titlePrefix = ";;";
+    public static String commandPrefix = ";;";
+    public static String titlePrefix = ";;";
     public static final String dbListSeperator = ",";
 
     public static final String inCorrectArguments = "Incorrect Arguments.\nUsage:\n%s\nUse \n"+commandPrefix+HelpCommandCommand.name+" %s\nto learn more about the command.";

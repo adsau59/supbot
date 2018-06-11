@@ -1,17 +1,23 @@
 # Supbot
-Whatsapp Chatbot using java and selenium, [Youtube video](https://www.youtube.com/watch?v=MWCjVzM0rW8).<br/>
+A Whatsapp Chatbot API (using java and selenium), [Youtube video](https://www.youtube.com/watch?v=MWCjVzM0rW8).<br/>
 [Subscribe to my Channel](https://www.youtube.com/channel/UCYik1Iuvf2bEw0ewDHqDnGw) as I do streams while developing the bot
 
 ### How to install
+<center>
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/XURtoZfKdBg/0.jpg)](http://www.youtube.com/watch?v=XURtoZfKdBg)
+</center>
+You can either watch the Setting up Supbot video on youtube, or follow the sets written below
 
-Download [chromedriver](https://www.seleniumhq.org/download/) for selenium and put it in your path variable
+- Download [chromedriver](https://www.seleniumhq.org/download/) for selenium and put it in your path variable.
+- Clone/Download the project.
+- Open the example project in an IDE.
+- Include the libraries in the lib folder.
+- Then just run the main class.
+- To add your group to the bot.
+- Add a group id to your whatsapp group by writing ```;;<groupid>``` preceding to it, each group mush have a unique group id.
+- Use this command in console ```group add <groupid>``` to add the group to the bot.
 
-for the bot to detect the groups, the name of the group, it should contain its id with ;; in the end (for example, ;;yo).<br/>
-I have created 2 ids "1" and "2" for testing, so just put ;;1 and ;;2 in the end of your groups.<br/>
-To add new group simply type "group add &lt;groupID&gt;" in the console to add a group with the specified group id,<br/>
-and "group remove &lt;groupID&gt;" to remove a group with id.
-
-to get debug messages, turn on logging by using "log on" command in the console
+Make sure Google Chrome is updated. 
 
 ### How the bot works
 
@@ -23,15 +29,21 @@ read the comments in each class to understand what the class does.<br/>
 to create new Feature/Action simple create a new class and extend it with its abstract class and implement its method,<br/>
 look at the core features to understand how it works<br/>
 I also have commented all the files explaining what they do.<br/>
+There are many more concepts, which I will cover in the [video tutorial series](https://www.youtube.com/playlist?list=PLdeajH45r2EKfD4lB6LJW6jF66PLSFGFa).<br/>
 
 ### Exit the bot
 
-type quit and press enter in the console to exit the bot
+type quit and press enter in the console to exit the bot.
+
+### I'm confused :(
+Hop in to my discord server, [DefineX Community Server](https://discord.gg/V6e2fpc), I'll help you out over there.
+
+### Feeling generous?
+You can donate me on [PayPal](https://www.paypal.me/AdamSaudagar).
 
 ### Whats new
-
-check out [changes](https://github.com/adsau59/supbot/blob/master/changes) in the repository
+check out [changes](https://github.com/adsau59/supbot/blob/master/changes) in the repository.
 
 ### Bugs?
 
-if you find any bugs, create an issure on github
+if you find any bugs, create an issure on github.

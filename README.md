@@ -3,9 +3,9 @@ A Whatsapp Chatbot API (using java and selenium), [Youtube video](https://www.yo
 [Subscribe to my Channel](https://www.youtube.com/channel/UCYik1Iuvf2bEw0ewDHqDnGw) as I do streams while developing the bot
 
 ### How to install
-<center>
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/XURtoZfKdBg/0.jpg)](http://www.youtube.com/watch?v=XURtoZfKdBg)
-</center>
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=XURtoZfKdBg"><img src="https://img.youtube.com/vi/XURtoZfKdBg/0.jpg" alt="IMAGE ALT TEXT"></a>
+</div>
 You can either watch the Setting up Supbot video on youtube, or follow the sets written below
 
 - Download [chromedriver](https://www.seleniumhq.org/download/) for selenium and put it in your path variable.

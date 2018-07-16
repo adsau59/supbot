@@ -1,5 +1,15 @@
 dd/mm/yy
 
+16/07/18:
+	Fixed Bugs:
+		bot taps the wrong chat if it shifts up or down due to new messages in other group
+			cause: the webview of chatgroup list item was cached which swapped when a listitem shifts up and down to different group during execution
+			fix: find the webview everytime it is needed (removed cached webview for chatgroup listitem)
+			
+		CheckerThread crashes when a group without ";;" gets a message
+			cause: group title name was split by ";;" and the 2nd item in the array is checked as the groupid, if the group doesnt have ";;" it would give IndexOutOfBoundExeption
+			fix: check if the list after splitting have more than 2 elements, before using the 2nd item to search for groupid
+
 29/4/18:
 	Created Scheduler system
 		Scheduler system enables the bot to schedule tasks at a perticular time and date.

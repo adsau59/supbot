@@ -30,7 +30,7 @@ public class ChatGroup{
      * it is compared in CheckInCurrentGroupAction with itself, to detect new chat
      */
     private List<ChatItem> chatItemList;
-    private WebElement chatWebElement; //div on which u click to open chat
+    //private WebElement chatWebElement; //div on which u click to open chat
 
     /**
      * Constructor
@@ -40,7 +40,7 @@ public class ChatGroup{
     public ChatGroup(String groupId, List<Feature> myFeatures) {
         this.chatItemList = new ArrayList<>();
         this.groupId = groupId;
-
+/*
         try {
             this.chatWebElement = Bot.getWebDriver().findElement(By.xpath(XPaths.getGroupNameXPath(groupId)));
         }catch (NoSuchElementException e){
@@ -49,7 +49,7 @@ public class ChatGroup{
 
             Log.p(e);
         }
-
+*/
         this.myFeatures = myFeatures;
     }
 
@@ -137,11 +137,19 @@ public class ChatGroup{
     }
 
     /**
-     * Chat Group web element getter
+     * Gets the ChatWebElement
      * @return chat group web element
      */
     public WebElement getChatWebElement() {
-        return chatWebElement;
+        try {
+            return Bot.getWebDriver().findElement(By.xpath(XPaths.getGroupNameXPath(groupId)));
+        }catch (NoSuchElementException e){
+            Log.e(String.format("Group with id: %s not found, please make sure you have a group with %s%s in the end of the group title,",
+                    groupId, Strings.commandPrefix, groupId));
+
+            Log.p(e);
+        }
+        return null;
     }
 
     /**

@@ -34,13 +34,20 @@ public class CheckOtherGroupForNewAction extends Action {
         List<WebElement> newChats = Bot.getWebDriver().findElements(By.xpath(XPaths.newChatGroup));
 
         for(WebElement element:newChats) {
-            //getting name from html and searching for it in database for id, then
-            ChatGroup newChatGroup = Bot.getChatGroupsManager().findGroupById(Utils.chatGroupNameToUID(element.getText()));
 
-            //if id is found add action to actionmanager
-            if(newChatGroup != null) {
-                CheckInNewGroupAction checkInNewGroupAction = new CheckInNewGroupAction(newChatGroup);
-                Bot.getActionManager().add(checkInNewGroupAction);
+            String chatgroupUID = Utils.chatGroupNameToUID(element.getText());
+
+            if(chatgroupUID != null){
+                //getting name from html and searching for it in database for id, then
+                ChatGroup newChatGroup = Bot.getChatGroupsManager().findGroupById(chatgroupUID);
+
+
+
+                //if id is found add action to actionmanager
+                if(newChatGroup != null) {
+                    CheckInNewGroupAction checkInNewGroupAction = new CheckInNewGroupAction(newChatGroup);
+                    Bot.getActionManager().add(checkInNewGroupAction);
+                }
             }
         }
 

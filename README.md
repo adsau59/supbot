@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="https://cdn.steemitimages.com/DQmVfVL98g7QbEyb4t4bt5A9DuMZLBYpiekwceBswjSUqTJ/small%20banner.jpg"/>
+</div>
+
 # Supbot
 A Whatsapp Chatbot API (using java and selenium), [Youtube video](https://www.youtube.com/watch?v=MWCjVzM0rW8).<br/>
 [Subscribe to my Channel](https://www.youtube.com/channel/UCYik1Iuvf2bEw0ewDHqDnGw) as I do streams while developing the bot
@@ -46,4 +50,4 @@ check out [changes](https://github.com/adsau59/supbot/blob/master/changes) in th
 
 ### Bugs?
 
-if you find any bugs, create an issure on github.
+if you find any bugs, create an issue on github.

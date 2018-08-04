@@ -1,5 +1,14 @@
 dd/mm/yy
 
+05/08/18:
+
+	XPaths:
+		Changed input text xpath
+		Updated XPaths.newChatGroup to ignore other icons (like mute) which are next to new message icon
+		
+	Bubble:
+		Added exception handling when bubble doesnt contain any text (like emojies)
+
 16/07/18:
 	Fixed Bugs:
 		bot taps the wrong chat if it shifts up or down due to new messages in other group

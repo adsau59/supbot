@@ -1,9 +1,11 @@
 package in.definex.ChatSystem;
 
 import in.definex.Bot;
+import in.definex.Console.Log;
 import in.definex.String.Strings;
 import in.definex.String.XPaths;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -33,8 +35,14 @@ public class Bubble {
      */
     public String getText(){
 
-        if(text == null)
-            text = webElement.findElement(By.xpath(XPaths.bubbleToText)).getText();
+        if(text == null){
+            try{
+                text = webElement.findElement(By.xpath(XPaths.bubbleToText)).getText();
+            }catch (NoSuchElementException e){
+                Log.d("Bubble","Bubble doesn't contain text");
+                return "";
+            }
+        }
 
         return text;
     }

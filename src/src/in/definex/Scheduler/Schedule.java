@@ -21,7 +21,7 @@ public class Schedule implements Serializable {
     private String date;
     private transient Timer timer;
     private Long reScheduleDeltaTime;
-    private static final String DATE_PATTERN = "yyyy.MM.dd.HH.mm.ss";
+    public static final String DATE_PATTERN = "yyyy.MM.dd.HH.mm.ss";
 
     /**
      * Constructor
@@ -106,7 +106,7 @@ public class Schedule implements Serializable {
     /**
      * Reschedule the task, if reScheduleDeltaTime is greater than zero
      */
-    private void nextSchedule(){
+    public void nextSchedule(){
 
         if(reScheduleDeltaTime <= 0)
             return;

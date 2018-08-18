@@ -6,7 +6,7 @@ import in.definex.Action.Core.Checker.CheckInCurrentGroupAction;
 import in.definex.Action.Core.Checker.CheckOtherGroupForNewAction;
 import in.definex.Action.Core.MoveToChatAction;
 import in.definex.Action.Core.SendMessageAction;
-import in.definex.Action.RemoteActionCall;
+import in.definex.Action.StringActionInitializer;
 import in.definex.ChatSystem.ChatGroupsManager;
 import in.definex.ChatSystem.ChatProcessorManager;
 import in.definex.ChatSystem.Core.CommandCP;
@@ -25,15 +25,13 @@ import in.definex.Functions.Utils;
 import in.definex.NetworkJob.NetworkJobManager;
 import in.definex.Scheduler.ScheduleDatabase;
 import in.definex.Scheduler.ScheduleManager;
+import in.definex.Scheduler.ScheduleTaskInitializer;
 import in.definex.String.Strings;
 import in.definex.String.XPaths;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Looper class
@@ -117,9 +115,10 @@ public class Looper {
                 this,
                 new DatabaseManager(),
                 new Configuration(),
-                new RemoteActionCall(),
+                new StringActionInitializer(),
                 new ScheduleManager(),
-                new NetworkJobManager()
+                new NetworkJobManager(),
+                new ScheduleTaskInitializer()
         );
         Strings.commandPrefix = Bot.getConfiguration().GetConfig("command_prefix",";;");
         Strings.titlePrefix = Bot.getConfiguration().GetConfig("group_title_prefix", ";;");
@@ -166,7 +165,9 @@ public class Looper {
                 new LogCC(),
                 new RunCC(),
                 new ActionCallerCC(),
-                new CheckerCallerCC()
+                new CheckerCallerCC(),
+                new ScheduleCreateCC(),
+                new ScheduleDBDeleteCC()
         );
 
         //core database

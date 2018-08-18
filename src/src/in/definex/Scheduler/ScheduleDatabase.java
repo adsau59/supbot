@@ -67,26 +67,11 @@ public class ScheduleDatabase extends Database {
             pstmt.setString(1, name);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-            /*
-            Kryo kryo = new Kryo();
-            Output output = new Output(stream);
-            kryo.writeClassAndObject(output, schedule);
-            */
-
-            ObjectOutputStream out = null;
-            out = new ObjectOutputStream(stream);
+            ObjectOutputStream out = new ObjectOutputStream(stream);
             out.writeObject(schedule);
-
-            byte[] bytes = null;
-            bytes = stream.toByteArray();
-
-            //out.close();
-
-            //Blob x = new SerialBlob(bytes);
+            byte[] bytes = stream.toByteArray();
 
             pstmt.setBytes(2, bytes);
-
             pstmt.executeUpdate();
 
         } catch (SQLException | IOException e) {
@@ -126,20 +111,7 @@ public class ScheduleDatabase extends Database {
                 in = new ObjectInputStream(stream);
                 Schedule schedule = (Schedule)in.readObject();
 
-
-/*
-                byte[] bytes = null;
-                bytes = stream.toByteArray();
-
-
-
-                Kryo kryo = new Kryo();
-                Input input = new Input(new ByteArrayInputStream(bytes));
-
-                Schedule schedule = (Schedule) kryo.readClassAndObject(input);
-*/
                 scheduleBiMap.put(myName, schedule);
-
             }
 
         } catch (SQLException | IOException | ClassNotFoundException e) {
@@ -155,12 +127,17 @@ public class ScheduleDatabase extends Database {
         try(Connection con = connect();
             PreparedStatement pstmt = con.prepareStatement(updateByName)){
 
-            pstmt.setObject(1, schedule);
-            pstmt.setString(2, name);
 
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(stream);
+            out.writeObject(schedule);
+            byte[] bytes = stream.toByteArray();
+
+            pstmt.setBytes(1, bytes);
+            pstmt.setString(2, name);
             pstmt.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
 

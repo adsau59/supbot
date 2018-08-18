@@ -1,5 +1,6 @@
 package in.definex.Console;
 
+import in.definex.Feature.CommandAndArgs;
 import in.definex.Looper;
 
 import java.util.Arrays;
@@ -63,16 +64,16 @@ public class Console {
         while(!looper.isQuit()){
             System.out.print(">");
             String s = scanner.nextLine();
-            String[] command = s.split(" ");
+            CommandAndArgs commandAndArgs = CommandAndArgs.Split(s, false);
 
 
             //recognize command and sends it for processing
-            ConsoleCommand cc = consoleCommandManager.getConsoleCommandByKeyword(command[0]);
+            ConsoleCommand cc = consoleCommandManager.getConsoleCommandByKeyword(commandAndArgs.cmd);
 
             if(cc == null){
                 Log.e("Console Command not found");
             }else{
-                String result = cc.runCommand(Arrays.copyOfRange(command, 1, command.length));
+                String result = cc.runCommand(commandAndArgs.args);
                 Log.r(result);
             }
 

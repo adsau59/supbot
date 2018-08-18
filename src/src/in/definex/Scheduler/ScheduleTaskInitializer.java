@@ -1,6 +1,6 @@
-package in.definex.Action;
+package in.definex.Scheduler;
 
-import in.definex.Bot;
+import in.definex.Functions.Utils;
 import in.definex.Functions.out;
 
 import java.lang.reflect.InvocationTargetException;
@@ -8,43 +8,54 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 /**
- * RemoteActionCall enables the bot to recognize and create Action object from string,
- * The limitation of which being that all the parameters of Action to be created should have parameters only of type
+ *
+ * ScheduleTaskInitializer
+ * Helps convert arguments (array of strings) into ScheduleTask object
+ *
+ * enables the bot to recognize and create ScheduleTask object from string,
+ * The limitation of which being that
+ * all the parameters of ScheduleTask to be created should have parameters only of type
  * String, Integer, Float, or Boolean, if its not it should have a static method: Object castFromString(String s);
- * which the RemoteActionCall uses to convert a string query to parameters object.
+ * which the ScheduleTaskInitializer uses to convert a string query to parameters object.
+ *
+ * Before you can use this, you must add the class object of ScheduleTask
+ * in the scheduleTasks list by using Bot.getScheduleTaskInitializer().add() method
+ * it can be done in  addThingsInBot method in Looper.ExtraLooperFunctions in the Main class
+ *
  */
-public class RemoteActionCall {
+public class ScheduleTaskInitializer {
 
-    private List<Class<? extends Action>> actions;
+    /**
+     * Stores all the class of ScheduleTask
+     */
+    private List<Class<? extends ScheduleTask>> scheduleTasks;
 
     /**
      * Constructor
      */
-    public RemoteActionCall(){
-        actions = new ArrayList<>();
+    public ScheduleTaskInitializer() {
+        this.scheduleTasks = new ArrayList<>();
     }
 
+
     /**
-     * Creates an action and returns the action and response
+     * Creates ScheduleTask object from array of strings
      *
-     * @param actionout out action that is returned
-     * @param args String query to create the action
-     * @return Response, showing if it successfully created the action, or the what error has occurred creating the action
+     * @param taskout ScheduleTask Object created inside an out object
+     * @param args array of strings
+     * @return one of the Response enum
      */
-    public Response getAction(out<Action> actionout, String... args){
+    public Response getSceduleTask(out<ScheduleTask> taskout, String... args){
 
-        Class actionClass = getActionByName(args[0]);
+        Class taskClass = getScheduleTaskByName(args[0]);
 
-        if(actionClass == null) {
-            return Response.ActionNotFound;
-        }
+        if(taskClass == null)
+            return Response.NotFound;
 
-        //todo what if it has more than 1 constructors
         Class[] parameters;
         try {
-            parameters = actionClass.getConstructors()[0].getParameterTypes();
+            parameters = taskClass.getConstructors()[0].getParameterTypes();
         }catch (ArrayIndexOutOfBoundsException e){
             return Response.NoConstructorFound;
         }
@@ -52,7 +63,6 @@ public class RemoteActionCall {
         if(args.length - 1 != parameters.length) {
             return Response.IncorrectNumberOfArgs;
         }
-
 
         Object[] resultParams = new Object[parameters.length];
 
@@ -72,7 +82,7 @@ public class RemoteActionCall {
             else if(p == String.class){
                 resultParams[i] = args[i+1];
             }
-            else if(hasStringCaster(p)){
+            else if(Utils.hasStringCaster(p)){
                 try {
                     Object obj = p.getMethod("castFromString",String.class).invoke(null, args[i+1]);
 
@@ -93,7 +103,7 @@ public class RemoteActionCall {
         }
 
         try {
-            actionout.obj = (Action) actionClass.getDeclaredConstructor(parameters).newInstance(resultParams);
+            taskout.obj = (ScheduleTask) taskClass.getDeclaredConstructor(parameters).newInstance(resultParams);
             return Response.Success;
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
@@ -104,30 +114,22 @@ public class RemoteActionCall {
     }
 
     /**
-     * Directly calls the action instead of returning it
-     *
-     * @param args String query to create the action
-     * @return Response, showing if it successfully called the action, or the what error has occurred creating the action
+     * Add ScheduleTask to the ScheduleTaskInitializer
+     * @param taskClass Class to be added
      */
-    public Response callAction(String... args){
-        out<Action> actionout = new out<>();
-        Response response = getAction(actionout, args);
-
-        if(response.isSuccess())
-            Bot.getActionManager().add(actionout.obj);
-
-        return response;
+    @SafeVarargs
+    public final void add(Class<? extends ScheduleTask>... taskClass){
+        this.scheduleTasks.addAll(Arrays.asList(taskClass));
     }
 
     /**
-     * Returns class object with name.
-     *
-     * @param className Name of the action class
-     * @return Class object of the action1
+     * Gets the ScheduleTask from scheduleTasks list
+     * @param className name of the class
+     * @return class object of target ScheduleTask
      */
-    private Class<? extends Action> getActionByName(String className){
+    private Class<? extends ScheduleTask> getScheduleTaskByName(String className){
 
-        for(Class<? extends Action> a:actions){
+        for(Class<? extends ScheduleTask> a:scheduleTasks){
             if(a.getSimpleName().equals(className))
                 return a;
         }
@@ -135,40 +137,17 @@ public class RemoteActionCall {
         return null;
     }
 
-    /**
-     * Used to add more Action to RemoteActionCall
-     * @param actions Action classes to add
-     */
-    @SafeVarargs
-    public final void add(Class<? extends Action>... actions){
-        this.actions.addAll(Arrays.asList(actions));
-    }
 
     /**
-     * Searces for castFromString method in a class
-     *
-     * @param p Class to be searched
-     * @return true if p class have castFromString method
-     */
-    private boolean hasStringCaster(Class p){
-        try {
-            return p.getMethod("castFromString",String.class) != null;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * Response enum, for getAction method
+     * Enum of Responses for getScheduleTask Method
      */
     public enum Response {
-        ActionNotFound("Action not found."),
+        NotFound("ScheduleTask not found."),
         IncorrectNumberOfArgs("Incorrect number of arguments."),
         StringCasterReturnedNull("castFromString returned null"),
         IncorrectParameterType("Parameters should be either int, float, bool, string or should implement static method (Object castFromString(String s))"),
         NoConstructorFound("No public constructors found"),
-        Success("Action successfully called.");
+        Success("ScheduleTask successfully created.");
 
         private final String response;
 
@@ -184,5 +163,4 @@ public class RemoteActionCall {
             return this == Success;
         }
     }
-
 }

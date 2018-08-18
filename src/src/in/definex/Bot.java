@@ -2,9 +2,8 @@ package in.definex;
 
 import in.definex.Action.ActionManager;
 import in.definex.Action.Checker;
-import in.definex.Action.RemoteActionCall;
+import in.definex.Action.StringActionInitializer;
 import in.definex.ChatSystem.ChatGroupsManager;
-import in.definex.ChatSystem.ChatProcessor;
 import in.definex.ChatSystem.ChatProcessorManager;
 import in.definex.Console.Console;
 import in.definex.Database.Configuration;
@@ -12,6 +11,8 @@ import in.definex.Database.DatabaseManager;
 import in.definex.Feature.FeatureManager;
 import in.definex.NetworkJob.NetworkJobManager;
 import in.definex.Scheduler.ScheduleManager;
+import in.definex.Scheduler.ScheduleTask;
+import in.definex.Scheduler.ScheduleTaskInitializer;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -43,8 +44,9 @@ public class Bot {
     private DatabaseManager databaseManager;
     private Configuration configuration;
     private ChatProcessorManager chatProcessorManager;
-    private RemoteActionCall remoteActionCall;
+    private StringActionInitializer stringActionInitializer;
     private ScheduleManager scheduleManager;
+    private ScheduleTaskInitializer scheduleTaskInitializer;
     private NetworkJobManager networkJobManager;
 
     static void CreateBot(WebDriver webDriver,
@@ -57,9 +59,10 @@ public class Bot {
                           Looper looper,
                           DatabaseManager databaseManager,
                           Configuration configuration,
-                          RemoteActionCall remoteActionCall,
+                          StringActionInitializer stringActionInitializer,
                           ScheduleManager scheduleManager,
-                          NetworkJobManager networkJobManager
+                          NetworkJobManager networkJobManager,
+                          ScheduleTaskInitializer scheduleTaskInitializer
     ) {
         me = new Bot();
 
@@ -73,9 +76,10 @@ public class Bot {
         me.looper = looper;
         me.configuration = configuration;
         me.databaseManager = databaseManager;
-        me.remoteActionCall = remoteActionCall;
+        me.stringActionInitializer = stringActionInitializer;
         me.scheduleManager = scheduleManager;
         me.networkJobManager = networkJobManager;
+        me.scheduleTaskInitializer = scheduleTaskInitializer;
     }
 
     public static WebDriver getWebDriver() {
@@ -118,8 +122,8 @@ public class Bot {
         return me.databaseManager;
     }
 
-    public static RemoteActionCall getRemoteActionCall() {
-        return me.remoteActionCall;
+    public static StringActionInitializer getRemoteActionCall() {
+        return me.stringActionInitializer;
     }
 
     public static ScheduleManager getScheduleManager() { return me.scheduleManager;}
@@ -131,5 +135,7 @@ public class Bot {
     public static NetworkJobManager getNetworkJobManager() {
         return me.networkJobManager;
     }
+
+    public static ScheduleTaskInitializer getScheduleTaskInitializer(){return me.scheduleTaskInitializer;}
 
 }

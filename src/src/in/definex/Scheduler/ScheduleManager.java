@@ -46,12 +46,25 @@ public class ScheduleManager {
     }
 
     /**
+     * Returns the Schedule with name
+     * @param name name of the schedule
+     * @return Schedule object
+     */
+    public Schedule get(String name){
+        return scheduleMap.get(name);
+    }
+
+    /**
      * Remove a schedule with name.
      * @param name name of the schedule to be removed.
      */
     public void remove(String name){
         scheduleMap.get(name).cancel();
         scheduleMap.remove(name);
+        ScheduleDatabase.DeleteSchedule(name);
+    }
+
+    public void dbDelete(String name){
         ScheduleDatabase.DeleteSchedule(name);
     }
 
@@ -67,7 +80,7 @@ public class ScheduleManager {
      * Updates the database with the Schedule Object.
      * @param schedule schedule object to be updated.
      */
-    void notifyUpdate(Schedule schedule){
+    public void notifyUpdate(Schedule schedule){
         ScheduleDatabase.UpdateSchedule(scheduleMap.inverse().get(schedule), schedule);
     }
 

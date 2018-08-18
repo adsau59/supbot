@@ -1,5 +1,8 @@
 package in.definex;
 
+import in.definex.Action.ActionManager;
+import in.definex.Action.Core.SendMessageAction;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -37,6 +40,14 @@ public class Main {
         looper.start();
 
 
+        SendMessageAction sendMessageAction = new SendMessageAction(
+                Bot.getChatGroupsManager().findGroupById("group1"),
+                "yo +91 90290 90597 how are you?"
+        );
+
+        sendMessageAction.tagPhoneNumbers("\\+\\d{2} \\d{5} \\d{5}");
+
+        Bot.getActionManager().add(sendMessageAction);
 
         //Wait for the bot to quit.
         looper.join();

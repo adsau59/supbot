@@ -190,7 +190,7 @@ public class Client {
 
 
     /**
-     * Used in RemoteActionCall to convert string query into client.
+     * Used in StringActionInitializer to convert string query into client.
      * passed in string in format, a-b, where a is client name, and b is group id
      *
      * @param s client string query

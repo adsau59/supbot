@@ -28,9 +28,13 @@ public class CommandAndArgs {
      * @param text text to be converted to CommandAndArgs
      * @return CommandAndArgs object
      */
-    public static CommandAndArgs Split(String text){
+    public static CommandAndArgs Split(String text, Boolean useCommandPrefix){
 
-        String rhs = text.split(Strings.commandPrefix)[1];
+        String rhs;
+        if(useCommandPrefix)
+            rhs = text.split(Strings.commandPrefix)[1];
+        else
+            rhs = text;
 
         List<String> matchList = new ArrayList<>();
         Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
@@ -51,6 +55,10 @@ public class CommandAndArgs {
         String[] rest = matchList.toArray(new String[0]);
         return new CommandAndArgs(rest[0], Arrays.copyOfRange(rest, 1, rest.length));
 
+    }
+
+    public static CommandAndArgs Split(String text){
+        return Split(text, true);
     }
 
 }

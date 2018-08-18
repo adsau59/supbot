@@ -1,11 +1,9 @@
 package in.definex.Console.Core;
 
 import in.definex.Action.Action;
-import in.definex.Action.Checker;
-import in.definex.Action.RemoteActionCall;
+import in.definex.Action.StringActionInitializer;
 import in.definex.Bot;
 import in.definex.Console.ConsoleCommand;
-import in.definex.Console.Log;
 import in.definex.Functions.out;
 
 import java.util.Arrays;
@@ -25,7 +23,7 @@ public class CheckerCallerCC extends ConsoleCommand {
 
 
             out<Action> actionout = new out<>();
-            RemoteActionCall.Response response = Bot.getRemoteActionCall().getAction(actionout, Arrays.copyOfRange(args, 0, args.length-2));
+            StringActionInitializer.Response response = Bot.getRemoteActionCall().getAction(actionout, Arrays.copyOfRange(args, 0, args.length-2));
 
             if(response.isSuccess()) {
                 if (checkerTimeout == 0)

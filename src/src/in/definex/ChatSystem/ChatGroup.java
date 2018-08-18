@@ -161,7 +161,7 @@ public class ChatGroup{
     }
 
     /**
-     * Method used by RemoteActionCall
+     * Method used by StringActionInitializer
      * @param s chatgroup id
      * @return chatgroup object
      */

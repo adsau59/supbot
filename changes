@@ -1,5 +1,40 @@
 dd/mm/yy
 
+18/08/18:
+
+	XPath:
+		updated xpath for bubble to author name
+		
+	SendMessageAction:
+		added way to tag people with phonenumber regex
+		
+	ConsoleCommand:
+		added way to send arguments with space using qoutes
+		
+	Schedule:
+		made nextSchedule() method public
+		
+	RemoteActionCall:
+		Changed name of RemoteActionCall to StringActionInitializer
+		
+	ScheduleManager:
+		made notifyUpdate public
+		
+	Created ScheduleTaskInitializer:
+		Helps convert arguments (array of strings) into ScheduleTask object
+		
+	Created ScheduleCreateCC:
+		Initialize schedule using Console Command
+		
+	Created ScheduleDBDeleteCC:
+		Delete Schedule from database
+		
+	Bug fixed ScheduleDatabase.UpdateSchedule:
+		blob in ScheduleDatase gets currupted when UpdateSchedule was used
+		cause: object name was being saved instead of bytes of serialized object
+		fix: serialized schedule object then stored in the blob as bytes
+		
+
 05/08/18:
 
 	XPaths:

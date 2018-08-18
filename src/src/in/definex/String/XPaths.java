@@ -16,7 +16,7 @@ public class XPaths {
     //get the text relative from chat bubble
     public static final String bubbleToText = ".//span[contains(@class,'copyable-text')]";
     //get the author name relative from chat bubble (the bubble whihc has the author name)
-    public static final String bubbleToAuthorName = ".//span[@class='_2a1Yw _1OmDL']";
+    public static final String bubbleToAuthorName = ".//span[@class='RZ7GO']";
 
     //get the input body of the chat
     public static final String inputBody = "//div[@class='_1Plpp']";

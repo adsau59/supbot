@@ -39,7 +39,7 @@ public class Main {
         //Bot Services can only be used after looper.start()
         looper.start();
 
-
+/*
         SendMessageAction sendMessageAction = new SendMessageAction(
                 Bot.getChatGroupsManager().findGroupById("group1"),
                 "yo +91 90290 90597 how are you?"
@@ -48,7 +48,7 @@ public class Main {
         sendMessageAction.tagPhoneNumbers("\\+\\d{2} \\d{5} \\d{5}");
 
         Bot.getActionManager().add(sendMessageAction);
-
+*/
         //Wait for the bot to quit.
         looper.join();
     }

@@ -167,7 +167,8 @@ public class Looper {
                 new ActionCallerCC(),
                 new CheckerCallerCC(),
                 new ScheduleCreateCC(),
-                new ScheduleDBDeleteCC()
+                new ScheduleDBDeleteCC(),
+                new VersionCC()
         );
 
         //core database

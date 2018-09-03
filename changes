@@ -1,5 +1,12 @@
 dd/mm/yy
 
+03/07/2018:
+	Created VersionCC:
+		shows version of supbot api
+		
+	Updated XPath:
+		bubbleToAuthurName
+
 18/08/18:
 
 	XPath:

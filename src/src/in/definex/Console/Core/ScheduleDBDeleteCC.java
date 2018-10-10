@@ -23,9 +23,18 @@ public class ScheduleDBDeleteCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
+    public String compute(String[] args) {
         Bot.getScheduleManager().dbDelete(args[0]);
 
         return "Schedule DB Delete called";
+    }
+
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "chedule-db-delete SCHEDULENAME",
+                "schedule-db-delete GoodMorningSchedule1",
+                "Delete schedule directly from database"
+        );
     }
 }

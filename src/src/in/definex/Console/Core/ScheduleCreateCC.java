@@ -36,7 +36,7 @@ public class ScheduleCreateCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
+    public String compute(String[] args) {
 
         /*
         0: Schedule name
@@ -71,5 +71,16 @@ public class ScheduleCreateCC extends ConsoleCommand {
                 );
 
         return "Schedule has been created";
+    }
+
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "schedule-create SCHEDULE_NAME DATE RESCHEDULE_TIME_IN_MS SCHEDULETASK_CLASS_NAME [SCHEDULETASK_PARMS...]",
+                "schedule-create GoodMorningSchedule1 2018.08.18.09.00.00 86400000 GoodMorningScheduleTask group1",
+                "Initialize schedule using Console Command\n"+
+                        "Used to create schedule for the first time,\n" +
+                        "after which it is stored in the database and loaded automatically when needed"
+        );
     }
 }

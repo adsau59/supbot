@@ -23,6 +23,8 @@ public class Schedule implements Serializable {
     private Long reScheduleDeltaTime;
     public static final String DATE_PATTERN = "yyyy.MM.dd.HH.mm.ss";
 
+    public static final SimpleDateFormat DateFormat = new SimpleDateFormat(DATE_PATTERN);
+
     /**
      * Constructor
      *
@@ -34,7 +36,7 @@ public class Schedule implements Serializable {
      */
     public Schedule(ScheduleTask scheduleTask, String date, Long reScheduleDeltaTime) {
         try {
-            new SimpleDateFormat(DATE_PATTERN).parse(date);
+            DateFormat.parse(date);
         } catch (ParseException e) {
             Log.p(e);
             Log.e(String.format("Date is not in format: %s", DATE_PATTERN));
@@ -146,7 +148,7 @@ public class Schedule implements Serializable {
     private Long getDelay()
     {
         try {
-            long taskEpoc = new SimpleDateFormat(DATE_PATTERN).parse(date).getTime();
+            long taskEpoc = DateFormat.parse(date).getTime();
             long now = new Date().getTime();
 
             return  taskEpoc - now;
@@ -162,7 +164,7 @@ public class Schedule implements Serializable {
     private void updateDateFromDelay(long delay)
     {
         long epoch = new Date().getTime() + delay;
-        date = new SimpleDateFormat(DATE_PATTERN).format(new Date(epoch));
+        date = DateFormat.format(new Date(epoch));
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.Arrays;
 /**
  * RunCC
  * Run Bot commands using console,
- * so feature, or role restriction
+ * with no feature or role restriction
  *
  * run <groupid> <command> <args>
  *
@@ -27,7 +27,7 @@ public class RunCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
+    public String compute(String[] args) {
 
         if(args.length < 2)
             return "Insufficient Arguments";
@@ -47,5 +47,15 @@ public class RunCC extends ConsoleCommand {
         featureAndCommand.command.proccess(chatGroup, client, Arrays.copyOfRange(args, 2, args.length));
 
         return "Command Initiated successfully, response will be sent in the group";
+    }
+
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "run <groupid> <command> <args>",
+                "run group1 promote Adam",
+                "Run Bot commands using console,\n" +
+                        "with no feature or role restriction"
+        );
     }
 }

@@ -23,7 +23,7 @@ public class GroupCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
+    public String compute(String[] args) {
 
         String gid;
         ChatGroup chatGroup;
@@ -67,6 +67,16 @@ public class GroupCC extends ConsoleCommand {
                 return "Invalid Arguments, use 'show', 'add' or 'remove'";
 
         }
+    }
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "group show\n" +
+                        "group add <gid>\n" +
+                        "group remove <gid>",
+                "group add group1",
+                "Add, Remove, Show groups that can be recognized by the bot"
+        );
     }
 
 

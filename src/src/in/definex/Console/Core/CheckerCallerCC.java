@@ -8,6 +8,21 @@ import in.definex.Functions.out;
 
 import java.util.Arrays;
 
+
+/**
+ * CheckerCallerCC : ConsoleCommand
+ * add a checker action during runtime using console
+ * used for debugging,
+ * CHECKER_TIMEOUT 0 to run it forever
+ *
+ * Usage:
+ * checker ACTION_CLASS_NAME [ACTION_CONSTRUCTOR_PARAMS...] BOOL_REMOVE_CHECKER_ON_SUCCESS CHECKER_TIMEOUT
+ *
+ * Example:
+ * checker CheckOtherGroupForNewAction false 0
+ *
+ */
+
 public class CheckerCallerCC extends ConsoleCommand {
 
     public CheckerCallerCC() {
@@ -15,7 +30,7 @@ public class CheckerCallerCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
+    public String compute(String[] args) {
 
         try{
             long checkerTimeout = Long.valueOf(args[args.length-1]);
@@ -39,5 +54,16 @@ public class CheckerCallerCC extends ConsoleCommand {
             e.printStackTrace();
             return "must be in format:\nchecker ActionName arg1 arg2 argN removeCheckerOnSuccess? timeIntMs";
         }
+    }
+
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "checker ACTION_CLASS_NAME [ACTION_CONSTRUCTOR_PARAMS...] BOOL_REMOVE_CHECKER_ON_SUCCESS CHECKER_TIMEOUT",
+                "checker CheckOtherGroupForNewAction false 0",
+                "add a checker action during runtime using console\n" +
+                        "used for debugging, \n" +
+                        "CHECKER_TIMEOUT 0 to run it forever"
+        );
     }
 }

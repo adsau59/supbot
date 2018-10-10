@@ -12,7 +12,7 @@ import in.definex.Console.ConsoleCommand;
  * Usage:
  * action ACTION_CLASS_NAME [ACTION_CONSTRUCTOR_PARAMS]
  *
- * Usage:
+ * Example:
  * action SendMessageAction group1 "I am bot, SUPBOT!!!"
  *
  */
@@ -24,9 +24,18 @@ public class ActionCallerCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
+    public String compute(String[] args) {
         StringActionInitializer.Response response = Bot.getRemoteActionCall().callAction(args);
 
         return response.getResponseString();
+    }
+
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "action ACTION_CLASS_NAME [ACTION_CONSTRUCTOR_PARAMS]",
+                "action SendMessageAction group1 \"I am bot, SUPBOT!!!\"",
+                "Add and action to ActionManager using Console Commands"
+        );
     }
 }

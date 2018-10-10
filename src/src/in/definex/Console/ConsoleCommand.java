@@ -1,5 +1,7 @@
 package in.definex.Console;
 
+import in.definex.String.Strings;
+
 /**
  * ConsoleCommand
  * abstract ConsoleCommand class
@@ -45,7 +47,13 @@ public abstract class ConsoleCommand {
     String runCommand(String[] args){
 
         if(!doesHaveSufficientArgs(args))
-            return "Doesn't have sufficent arguments";
+            return "Doesn't have sufficent arguments\n\n"+
+                    String.format(
+                            Strings.helpConsoleCommandFormate,
+                            this.getClass().getSimpleName(),
+                            getHelper().description,
+                            getHelper().template,
+                            getHelper().example);
 
         return compute(args);
 
@@ -57,7 +65,30 @@ public abstract class ConsoleCommand {
      * @param args arguments used in console
      * @return response showed in the console
      */
-    protected abstract String compute(String[] args);
+    public abstract String compute(String[] args);
+
+
+    /**
+     * Helper class including template, example and description for the console command
+     */
+    public class Helper{
+        public String template;
+        public String example;
+        public String description;
+
+        public Helper(String template, String example, String description) {
+            this.template = template;
+            this.example = example;
+            this.description = description;
+        }
+    }
+
+    /**
+     * abstract method to be implemented for new COmmands
+     *
+     * @return Helper class including template, example and description for the console command created
+     */
+    public abstract Helper getHelper();
 
 
 }

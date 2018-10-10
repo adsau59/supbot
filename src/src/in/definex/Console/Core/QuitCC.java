@@ -18,8 +18,18 @@ public class QuitCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
+    public String compute(String[] args) {
         Bot.getLooper().quit();
         return "Quitting, Goodbye.";
+    }
+
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "quit",
+                "quit",
+                "Used to quit the bot,\n" +
+                        "just type quit and press enter to quit"
+        );
     }
 }

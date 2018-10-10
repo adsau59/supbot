@@ -21,7 +21,7 @@ public class LogCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
+    public String compute(String[] args) {
 
         switch (args[0]){
             case "on":
@@ -35,6 +35,17 @@ public class LogCC extends ConsoleCommand {
             default:
                 return "Invalid Arguments, use either 'on' or 'off'";
         }
+    }
+
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "log on\n" +
+                        "log off",
+                "log on\n" +
+                        "log off",
+                "Console Command to turn loging on or off"
+        );
     }
 
 }

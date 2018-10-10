@@ -19,6 +19,9 @@ public class ConsoleCommandManager {
         consoleCommandList = new ArrayList<>();
     }
 
+    public List<ConsoleCommand> getConsoleCommandList() {
+        return consoleCommandList;
+    }
 
     /**
      * Adds new console command to the manager,

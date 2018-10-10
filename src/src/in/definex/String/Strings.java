@@ -44,6 +44,16 @@ public class Strings {
     public static final String helpFeatureResponse = "%s\n%s\nCommands:\n%s";
     public static final String helpCommandResponse = "%s\n%s\nUsage:\n%s\nExample:\n%s\nMinimum Role:\n%s";
 
+    public static final String helpConsoleCommandFormate = "" +
+            "%s\n" +
+            "%s\n" +
+            "\n" +
+            "Usage:\n" +
+            "%s\n" +
+            "\n" +
+            "Example:\n" +
+            "%s";
+
 
 
     public static String fromReferenceToClientName(String refernce){

@@ -12,7 +12,16 @@ public class VersionCC extends ConsoleCommand {
     }
 
     @Override
-    protected String compute(String[] args) {
-        return "v0.3.1";
+    public String compute(String[] args) {
+        return "v0.3.2";
+    }
+
+    @Override
+    public Helper getHelper() {
+        return new Helper(
+                "version",
+                "version",
+                "Shows version of supbot"
+        );
     }
 }

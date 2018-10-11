@@ -25,6 +25,10 @@ public class ScheduleManager {
         }
     }
 
+    public BiMap<String, Schedule> getScheduleMap() {
+        return scheduleMap;
+    }
+
     /**
      * Add a new Schedule.
      *
@@ -80,7 +84,7 @@ public class ScheduleManager {
      * Updates the database with the Schedule Object.
      * @param schedule schedule object to be updated.
      */
-    public void notifyUpdate(Schedule schedule){
+    public void notifyDBUpdate(Schedule schedule){
         ScheduleDatabase.UpdateSchedule(scheduleMap.inverse().get(schedule), schedule);
     }
 

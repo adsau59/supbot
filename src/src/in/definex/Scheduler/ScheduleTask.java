@@ -8,28 +8,26 @@ import java.io.Serializable;
  * Must only contain members who is Implemented by Serializable or should have transient keyword.
  *
  */
-public abstract class ScheduleTask implements Serializable {
+public interface ScheduleTask extends Serializable {
 
     /**
      * Task to be performed on schedule.
      */
-    protected abstract void task();
+    void task();
 
     /**
      * When the task is missed because the bot was off,
      * taskMissed is called instead of task method.
-     *
-     * Rescheduling the Schedule should be done explicitly over here, if needed.
-     *
-     * @param schedule schedule which is ran this ScheduleTask
      */
-    protected abstract void taskMissed(Schedule schedule);
+    void taskMissed();
+
 
     /**
-     * Ran by Schedule, to run the task method
+     * Schedule for next task
+     *
+     * @param lastScheduleDate date of last schedule
+     * @return return empty string or null for one time task, else return date for next schedule
      */
-    void perform(){
-        task();
-    }
+    String getNextDate(String lastScheduleDate);
 
 }

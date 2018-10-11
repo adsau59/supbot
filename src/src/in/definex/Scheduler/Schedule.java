@@ -20,9 +20,8 @@ public class Schedule implements Serializable {
     private ScheduleTask scheduleTask;
     private String date;
     private transient Timer timer;
-    private Long reScheduleDeltaTime;
-    public static final String DATE_PATTERN = "yyyy.MM.dd.HH.mm.ss";
 
+    public static final String DATE_PATTERN = "yyyy.MM.dd.HH.mm.ss";
     public static final SimpleDateFormat DateFormat = new SimpleDateFormat(DATE_PATTERN);
 
     /**
@@ -32,9 +31,8 @@ public class Schedule implements Serializable {
      *
      * @param scheduleTask ScheduleTask to be ran
      * @param date date and time in format yyyy.MM.dd.HH.mm.ss to execute the ScheduleTask
-     * @param reScheduleDeltaTime time in ms to re-scheduled task (optional).
      */
-    public Schedule(ScheduleTask scheduleTask, String date, Long reScheduleDeltaTime) {
+    public Schedule(ScheduleTask scheduleTask, String date) {
         try {
             DateFormat.parse(date);
         } catch (ParseException e) {
@@ -44,12 +42,7 @@ public class Schedule implements Serializable {
 
         this.scheduleTask = scheduleTask;
         this.date = date;
-        this.reScheduleDeltaTime = reScheduleDeltaTime;
     }
-    public Schedule(ScheduleTask scheduleTask, String date){
-        this(scheduleTask,date,-1L);
-    }
-
 
     /**
      * Getters
@@ -60,12 +53,10 @@ public class Schedule implements Serializable {
     public String getDate() {
         return date;
     }
-    public Long getReScheduleDeltaTime() {
-        return reScheduleDeltaTime;
-    }
     public void setDate(String date) {
         this.date = date;
     }
+
     private Timer getTimer()
     {
         if(timer == null)
@@ -73,14 +64,6 @@ public class Schedule implements Serializable {
 
         return timer;
     }
-
-    /**
-     * Setters
-     */
-    public void setReScheduleDeltaTime(Long reScheduleDeltaTime) {
-        this.reScheduleDeltaTime = reScheduleDeltaTime;
-    }
-
 
     /**
      * Called by ScheduleManager to schedule the task.
@@ -94,33 +77,14 @@ public class Schedule implements Serializable {
             getTimer().schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    scheduleTask.perform();
-                    nextSchedule();
+                    scheduleTask.task();
                     checkIfFinishedThenUpdate();
                 }
             }, delay);
         }else {
-            scheduleTask.taskMissed(this);
+            scheduleTask.taskMissed();
             checkIfFinishedThenUpdate();
         }
-    }
-
-    /**
-     * Reschedule the task, if reScheduleDeltaTime is greater than zero
-     */
-    public void nextSchedule(){
-
-        if(reScheduleDeltaTime <= 0)
-            return;
-
-        getTimer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                scheduleTask.perform();
-                nextSchedule();
-            }
-        }, reScheduleDeltaTime);
-        updateDateFromDelay(reScheduleDeltaTime);
     }
 
     /**
@@ -128,10 +92,14 @@ public class Schedule implements Serializable {
      */
     private void checkIfFinishedThenUpdate()
     {
+        date = scheduleTask.getNextDate(date);
+
         if (getDelay() <= 0)
             Bot.getScheduleManager().remove(this);
-        else
-            Bot.getScheduleManager().notifyUpdate(this);
+        else {
+            Bot.getScheduleManager().notifyDBUpdate(this);
+            schedule();
+        }
     }
 
     /**
@@ -152,19 +120,9 @@ public class Schedule implements Serializable {
             long now = new Date().getTime();
 
             return  taskEpoc - now;
-        } catch (ParseException e) { }
+        } catch (Exception e) { }
 
         return -1L;
-    }
-
-    /**
-     * Calculates the target date from time difference in ms.
-     * @param delay time difference in ms from now till ScheduleTask.
-     */
-    private void updateDateFromDelay(long delay)
-    {
-        long epoch = new Date().getTime() + delay;
-        date = DateFormat.format(new Date(epoch));
     }
 
 }

@@ -7,7 +7,7 @@ public class XPaths {
 
 
     //get the name of the group
-    private static final String groupName = "//div[@class='_25Ooe']//span[contains(text(),\"%s\")]";
+    private static final String groupName = "//div[@class='_25Ooe']//span[contains(text(),\"%s%s\")]";
     //get the bubble of chat its currently in
     public static final String inMessageBubbles = "//div[contains(@class,'message-in')]//div[@class='Tkt2p']";
 
@@ -49,7 +49,7 @@ public class XPaths {
     public static final String ShareSendIcon = "//span[@data-icon=\"send-light\"]";
 
     public static String getGroupNameXPath(String groupUID){
-        return String.format(groupName, groupUID);
+        return String.format(groupName, Strings.titlePrefix, groupUID);
     }
 
 }

@@ -1,5 +1,31 @@
 dd/mm/yy
 
+11/10/2018:
+	Schedule and ScheduleTask rework:
+		Schedule:
+			removed reScheduleDeltaTime
+			removed nextSchedule()
+			
+		ScheduleTask:
+			added SchduleTask.getNextDate()
+				Schedule for next task
+			
+			changed from abstract class to interface
+				there was no need for ScheduleTask to be an abstract class
+				so to simplify things, it was changed to interface
+			
+		Created ScheduleCC and Removed ScheduleCreateCC and ScheduleDBDeleteCC:
+			SchdueleCC includes commands to create, delete, show schedules
+			hence keeping different ConsoleCommands was not needed so it was removed
+		
+		Created ReScheduler:
+			Helper Fucntion Class to reSchedule task easily
+	
+	ScheduleManager.notifyUpdate name changed to ScheduleManager.notifyDBUpdate
+		notifyUpdate did not give the correct intuition of what the method did so its name was changed
+	
+	
+
 10/10/2018:
 	Created HelpCC:
 		shows the available console commands and how to use them
@@ -9,6 +35,8 @@ dd/mm/yy
 	Added static DateFormat in Schedule Class:
 		All the Schedule code uses the same date format,
 		so in order to keep it constant DataFormat was added
+		
+	
 
 03/07/2018:
 	Created VersionCC:

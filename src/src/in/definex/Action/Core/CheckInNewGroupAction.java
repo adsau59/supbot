@@ -3,12 +3,8 @@ package in.definex.Action.Core;
 import in.definex.Action.Action;
 import in.definex.Bot;
 import in.definex.ChatSystem.Bubble;
-import in.definex.ChatSystem.ChatGroup;
 import in.definex.ChatSystem.Client;
-import in.definex.Functions.ActionTaskFunctions;
 import in.definex.String.XPaths;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +15,7 @@ import java.util.List;
  * Goto a non current chat and read new chat and process its command
  * also reset the groupchat and refills it with new chat
  *
- * used when CheckOtherGroupForNewAction checker, finds new chat
+ * used when CheckOtherChatForNewAction checker, finds new chat
  *
  * Created by adam_ on 02-12-2017.
  *
@@ -29,11 +25,11 @@ import java.util.List;
 public class CheckInNewGroupAction extends Action {
 
 
-    private ChatGroup chatGroup;
+    private Client chatGroup;
 
-    public CheckInNewGroupAction(ChatGroup chatGroup) {
+    public CheckInNewGroupAction(Client client) {
         super();
-        this.chatGroup = chatGroup;
+        this.chatGroup = client;
     }
 
     /**
@@ -50,18 +46,14 @@ public class CheckInNewGroupAction extends Action {
     @Override
     public boolean task() {
 
-        Bot.getActionManager().gotoGroup(chatGroup);
+        Bot.getActionManager().gotoChat(chatGroup);
 
         List<Bubble> newBubbles = Arrays.asList(Bubble.GetBubbles(XPaths.newChatBubbles));//Bot.getWebDriver().findElements(By.xpath(XPaths.newChatBubbles));
         for(Bubble bubble:newBubbles) {
 
             //Bubble bubble = new Bubble(element);
-            String clientName = bubble.getAuthor(newBubbles);
-            Client client = Client.getClient(
-                    clientName,
-                    chatGroup.getGroupId()
-            );
-
+            String clientName = bubble.getAuthor();
+            Client client = Bot.getClientManager().findClientByName(clientName);
             Bot.getChatProcessorManager().process(bubble, client);
 
         }

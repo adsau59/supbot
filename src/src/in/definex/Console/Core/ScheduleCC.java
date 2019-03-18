@@ -73,10 +73,6 @@ public class ScheduleCC extends ConsoleCommand {
 
                 return "Schedule removed";
 
-            case "db-only-delete":
-                Bot.getScheduleManager().dbDelete(args[1]);
-                return "Schedule DB only delete called";
-
             case "show":
 
                 String result = "";

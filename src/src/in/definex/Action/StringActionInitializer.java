@@ -42,7 +42,6 @@ public class StringActionInitializer {
             return Response.ActionNotFound;
         }
 
-        //todo what if it has more than 1 constructors
         Class[] parameters;
         try {
             parameters = actionClass.getConstructors()[0].getParameterTypes();

@@ -7,7 +7,7 @@ public class XPaths {
 
 
     //get the name of the group
-    private static final String groupName = "//div[@class='_25Ooe']//span[contains(text(),\"%s%s\")]";
+    private static final String clientName = "//div[@class='_25Ooe']//span[contains(text(),\"%s\")]";
     //get the bubble of chat its currently in
     public static final String inMessageBubbles = "//div[contains(@class,'message-in')]//div[@class='Tkt2p']";
 
@@ -16,7 +16,7 @@ public class XPaths {
     //get the text relative from chat bubble
     public static final String bubbleToText = ".//span[contains(@class,'copyable-text')]";
     //get the author name relative from chat bubble (the bubble whihc has the author name)
-    public static final String bubbleToAuthorName = ".//span[@class='_2a1Yw _1OmDL' or @class='RZ7GO']";
+    public static final String authorName = "//div[@class='_3XrHh']";
 
     //get the input body of the chat
     public static final String inputBody = "//div[@class='_1Plpp']";
@@ -48,8 +48,8 @@ public class XPaths {
     public static final String ShareCaptionTextInput = "//div[contains(@class,\"CzI8E\")]//div[contains(@class,\"_2S1VP\")]";
     public static final String ShareSendIcon = "//span[@data-icon=\"send-light\"]";
 
-    public static String getGroupNameXPath(String groupUID){
-        return String.format(groupName, Strings.titlePrefix, groupUID);
+    public static String getClientNameXPath(String groupUID){
+        return String.format(clientName, groupUID);
     }
 
 }

@@ -1,7 +1,5 @@
 package in.definex;
-
-import in.definex.Action.ActionManager;
-import in.definex.Action.Core.SendMessageAction;
+import in.definex.ChatSystem.Core.LoggingCP;
 
 public class Main {
 
@@ -19,13 +17,17 @@ public class Main {
 
                         //Bot.getFeatureManager().add(new YourFeature(Parameters params));
 
-                        //Bot.getChatProcessorManager.add(new YourChatProcessor(Parameters params));
+                        Bot.getChatProcessorManager().add(
+                                new LoggingCP()
+                        );
 
                         //Bot.getChecker().add(new YourCheckers(Parameters params));
 
                         //Bot.getConsole.add(new YourConsoleCommand(Parameters params));
 
                         //Bot.getRemoteActionCall().add(YourAction.class);
+
+
                     }
 
                     @Override

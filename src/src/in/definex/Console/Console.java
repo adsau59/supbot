@@ -1,12 +1,10 @@
 package in.definex.Console;
 
-import in.definex.Feature.CommandAndArgs;
+import in.definex.Functions.CommandAndArgs;
 import in.definex.Looper;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 
 /**
  * Console

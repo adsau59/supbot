@@ -25,7 +25,7 @@ public abstract class ChatProcessor {
      * @param bubble whatsapp chat bubble
      * @param client client who sent the chat
      */
-    public void process(Bubble bubble, Client client){
+    void process(Bubble bubble, Client client){
 
         if(multithreaded)
             new Thread(this.getClass().getName()+" Thread"){

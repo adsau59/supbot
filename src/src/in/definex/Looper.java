@@ -2,28 +2,20 @@ package in.definex;
 
 import in.definex.Action.ActionManager;
 import in.definex.Action.Checker;
-import in.definex.Action.Core.Checker.CheckInCurrentGroupAction;
-import in.definex.Action.Core.Checker.CheckOtherGroupForNewAction;
+import in.definex.Action.Core.Checker.CheckInCurrentChatAction;
+import in.definex.Action.Core.Checker.CheckOtherChatForNewAction;
 import in.definex.Action.Core.MoveToChatAction;
 import in.definex.Action.Core.SendMessageAction;
 import in.definex.Action.StringActionInitializer;
-import in.definex.ChatSystem.ChatGroupsManager;
 import in.definex.ChatSystem.ChatProcessorManager;
-import in.definex.ChatSystem.Core.CommandCP;
+import in.definex.ChatSystem.ClientManager;
+import in.definex.ChatSystem.Core.LoggingCP;
 import in.definex.Console.Console;
 import in.definex.Console.Core.*;
 import in.definex.Console.Log;
-import in.definex.Database.Configuration;
-import in.definex.Database.Core.ChatGroupDatabase;
-import in.definex.Database.Core.ClientDatabase;
-import in.definex.Database.DatabaseManager;
-import in.definex.Feature.Accounts.AccountsFeature;
-import in.definex.Feature.FeatureManager;
-import in.definex.Feature.GroupConfig.GroupConfigFeature;
-import in.definex.Feature.Help.HelpFeature;
+import in.definex.Functions.Configuration;
 import in.definex.Functions.Utils;
 import in.definex.NetworkJob.NetworkJobManager;
-import in.definex.Scheduler.ScheduleDatabase;
 import in.definex.Scheduler.ScheduleManager;
 import in.definex.Scheduler.ScheduleTaskInitializer;
 import in.definex.String.Strings;
@@ -108,17 +100,15 @@ public class Looper {
                 driver,
                 new ActionManager(),
                 new Checker(() -> Log.a("RESETTING CHECKERS")),
-                new FeatureManager(),
                 new ChatProcessorManager(),
                 new Console(this),
-                new ChatGroupsManager(),
                 this,
-                new DatabaseManager(),
-                new Configuration(),
                 new StringActionInitializer(),
                 new ScheduleManager(),
                 new NetworkJobManager(),
-                new ScheduleTaskInitializer()
+                new ScheduleTaskInitializer(),
+                new ClientManager(),
+                new Configuration()
         );
         Strings.commandPrefix = Bot.getConfiguration().GetConfig("command_prefix",";;");
         Strings.titlePrefix = Bot.getConfiguration().GetConfig("group_title_prefix", ";;");
@@ -145,25 +135,16 @@ public class Looper {
      */
     private void init(){
 
-        //core features
-        Bot.getFeatureManager().add(
-                new HelpFeature(),
-                new GroupConfigFeature(),
-                new AccountsFeature()
-        );
-
 
         //core checkers
         Bot.getChecker().addCheckers(
-                new CheckInCurrentGroupAction(),
-                new CheckOtherGroupForNewAction()
+                new CheckInCurrentChatAction(),
+                new CheckOtherChatForNewAction()
         );
         //coreConsoleCommands
         Bot.getConsole().getConsoleCommandManager().add(
             new QuitCC(),
-                new GroupCC(),
                 new LogCC(),
-                new RunCC(),
                 new ActionCallerCC(),
                 new CheckerCallerCC(),
                 new VersionCC(),
@@ -171,17 +152,11 @@ public class Looper {
                 new ScheduleCC()
         );
 
-        //core database
-        Bot.getDatabaseManager().add(
-                new ChatGroupDatabase(),
-                new ClientDatabase(),
-                new ScheduleDatabase()
+        Bot.getChatProcessorManager().add(
+                //new LoggingCP()
         );
 
-        //core ChatProcessors
-        Bot.getChatProcessorManager().add(
-                new CommandCP()
-        );
+
 
         Bot.getRemoteActionCall().add(
                 MoveToChatAction.class,
@@ -191,8 +166,6 @@ public class Looper {
         extraLooperFunctions.addThingsInBot();
 
         //init managers
-        Bot.getDatabaseManager().init();
-        Bot.getChatGroupsManager().loadGroups();
         Log.init();
         Bot.getScheduleManager().init();
 

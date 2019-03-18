@@ -2,13 +2,12 @@ package in.definex.Action.Core;
 
 import in.definex.Action.Action;
 import in.definex.Bot;
-import in.definex.ChatSystem.ChatGroup;
+import in.definex.ChatSystem.Client;
 import in.definex.Console.Log;
 import in.definex.Functions.Utils;
 import in.definex.String.XPaths;
 import org.apache.http.annotation.Experimental;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -21,20 +20,20 @@ import org.openqa.selenium.WebElement;
 public class SendMessageAction extends Action {
 
     private String text;
-    private ChatGroup chatGroup;
+    private Client client;
     private String phoneRegex;
 
 
     /**
      * Constructor
      *
-     * @param chatGroup ChatGroup to send message
+     * @param client ChatGroup to send message
      * @param text Text to send
      */
-    public SendMessageAction(ChatGroup chatGroup,String text) {
+    public SendMessageAction(Client client,String text) {
         super();
         this.text = text;
-        this.chatGroup = chatGroup;
+        this.client = client;
     }
 
     /**
@@ -50,7 +49,7 @@ public class SendMessageAction extends Action {
     @Override
     public boolean task() {
 
-        Bot.getActionManager().gotoGroup(chatGroup);
+        Bot.getActionManager().gotoChat(client);
 
         WebElement chatBox = Bot.getWebDriver().findElement(By.xpath(XPaths.inputBody));
 

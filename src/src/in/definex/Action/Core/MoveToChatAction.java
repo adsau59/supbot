@@ -2,7 +2,7 @@ package in.definex.Action.Core;
 
 import in.definex.Action.Action;
 import in.definex.Bot;
-import in.definex.ChatSystem.ChatGroup;
+import in.definex.ChatSystem.Client;
 
 
 /**
@@ -14,16 +14,16 @@ import in.definex.ChatSystem.ChatGroup;
  */
 public class MoveToChatAction extends Action {
 
-    private ChatGroup chatGroup;
-    public MoveToChatAction(ChatGroup chatGroup) {
+    private Client client;
+    public MoveToChatAction(Client chatGroup) {
         super();
-        this.chatGroup = chatGroup;
+        this.client = chatGroup;
     }
 
 
     @Override
     public boolean task() {
-        Bot.getActionManager().gotoGroup(chatGroup);
+        Bot.getActionManager().gotoChat(client);
         return true;
     }
 }

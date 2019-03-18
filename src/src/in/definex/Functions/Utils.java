@@ -28,14 +28,6 @@ public class Utils {
         }
 
     }
-    public static String chatGroupNameToUID(String name){
-        String[] nameParts = name.split(Strings.titlePrefix);
-
-        if(nameParts.length >= 2)
-            return  nameParts[1];
-
-        return null;
-    }
 
     public static String ConvertNewLine(String s){
         return s.replace("\n", Keys.chord(Keys.SHIFT, Keys.ENTER));

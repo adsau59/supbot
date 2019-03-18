@@ -24,21 +24,4 @@ public class BubbleFunctions {
         return bubble.findElement(By.xpath(XPaths.bubbleToText)).getText();
     }
 
-    public static String getAuthorNameFromBubble(WebElement bubble, List<WebElement> bubbles){
-
-        for(int i = bubbles.indexOf(bubble); i>=0; i--){
-
-            if(doesHaveAuthorName(bubbles.get(i))) {
-                return bubbles.get(i).findElement(By.xpath(XPaths.bubbleToAuthorName)).getText();
-            }
-        }
-
-        return null;
-    }
-
-    public static boolean doesHaveAuthorName(WebElement bubble){
-        return bubble.findElements(By.xpath(XPaths.bubbleToAuthorName)).size() != 0;
-    }
-
-
 }

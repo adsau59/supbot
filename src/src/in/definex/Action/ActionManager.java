@@ -1,7 +1,7 @@
 package in.definex.Action;
 
 import in.definex.Bot;
-import in.definex.ChatSystem.ChatGroup;
+import in.definex.ChatSystem.Client;
 import in.definex.Functions.ActionTaskFunctions;
 import in.definex.Functions.Utils;
 import in.definex.String.XPaths;
@@ -30,7 +30,7 @@ public class ActionManager {
     /**
      * Group with is focused in whatsapp web currently
      */
-    private ChatGroup activeGroup;
+    private Client activeClient;
 
     /**
      * True when performing an action
@@ -67,35 +67,36 @@ public class ActionManager {
         }
     }
 
+
     /**
      * used to move to a target group to perform action
      *
-     * @param chatGroup target group
+     * @param client target group
      * @param delay true if want to wait after changing group
      */
-    private void gotoGroup(ChatGroup chatGroup, boolean delay){
+    private void gotoChat(Client client, boolean delay){
 
-        if(chatGroup == activeGroup)
+        if(client == activeClient)
             return;
 
-        chatGroup.getChatWebElement().click();
-        activeGroup = chatGroup;
+        client.getChatWebElement().click();
+        activeClient = client;
 
         if(delay)
             Utils.waitFor(2000);
 
         List<WebElement> allBubbles = Bot.getWebDriver().findElements(By.xpath(XPaths.inMessageBubbles));
-        ActionTaskFunctions.resetAndPutChatInGroupChat(allBubbles, chatGroup);
+        ActionTaskFunctions.resetAndPutChatInGroupChat(allBubbles, client);
     }
 
     /**
      * used to move to a target group to perform action
      * (waits for 2s after changing group)
      *
-     * @param chatGroup target group
+     * @param client target group
      */
-    public void gotoGroup(ChatGroup chatGroup){
-        gotoGroup(chatGroup, true);
+    public void gotoChat(Client client){
+        gotoChat(client, true);
     }
 
     /**
@@ -103,8 +104,8 @@ public class ActionManager {
      *
      * @return current open group chat
      */
-    public ChatGroup getActiveChat(){
-        return activeGroup;
+    public Client getActiveChat(){
+        return activeClient;
     }
 
     /**

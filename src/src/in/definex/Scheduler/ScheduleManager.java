@@ -3,6 +3,7 @@ package in.definex.Scheduler;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+
 /**
  * ScheduleManager
  * Maintains a list of Schedule in name value BiMap
@@ -11,18 +12,24 @@ public class ScheduleManager {
 
     private BiMap<String,Schedule> scheduleMap;
 
+    //todo removed all db stuff
+
     /**
      * Loads the schedule map from database,
      * and then schedules them.
      */
     public void init()
     {
-        scheduleMap = ScheduleDatabase.GetSchedules();
+        scheduleMap = HashBiMap.create();
 
+        //todo broken
+        /*
         for(String name:scheduleMap.keySet())
         {
             scheduleMap.get(name).schedule();
         }
+        */
+
     }
 
     public BiMap<String, Schedule> getScheduleMap() {
@@ -44,7 +51,6 @@ public class ScheduleManager {
         scheduleMap.put(name, schedule);
         schedule.schedule();
 
-        ScheduleDatabase.SaveSchedule(name, schedule);
 
         return true;
     }
@@ -65,12 +71,8 @@ public class ScheduleManager {
     public void remove(String name){
         scheduleMap.get(name).cancel();
         scheduleMap.remove(name);
-        ScheduleDatabase.DeleteSchedule(name);
     }
 
-    public void dbDelete(String name){
-        ScheduleDatabase.DeleteSchedule(name);
-    }
 
     /**
      * Remove schedule with schedule object.
@@ -85,7 +87,6 @@ public class ScheduleManager {
      * @param schedule schedule object to be updated.
      */
     public void notifyDBUpdate(Schedule schedule){
-        ScheduleDatabase.UpdateSchedule(scheduleMap.inverse().get(schedule), schedule);
     }
 
     /**

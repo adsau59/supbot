@@ -1,11 +1,7 @@
-# Supbot
+# Supbot Personal
 
-<div align="center">
-  <img src="https://cdn.steemitimages.com/DQmVfVL98g7QbEyb4t4bt5A9DuMZLBYpiekwceBswjSUqTJ/small%20banner.jpg"/>
-</div>
-
-### What is Supbot API?
-Supbot API is a Whatsapp Group Chatbot API, [Showcase video](https://www.youtube.com/watch?v=MWCjVzM0rW8).
+### What is Supbot Personal API?
+Supbot API is a Whatsapp Personal Chatbot API, [Showcase video](https://www.youtube.com/watch?v=MWCjVzM0rW8).
 
 Whatsapp is the most used messenger platform, but the lack of bot support made it very tedious to perform some operations that other platform with bot support performs easily.
 
@@ -23,10 +19,8 @@ Supbot is made using
 - [JDBC](http://www.oracle.com/technetwork/java/javase/jdbc/index.html),  [google-gson](https://github.com/google/gson), [Apache HttpComponents](https://hc.apache.org/)
 
 ### Features
-- **Role system**, (Admin, CoAdmin, Elder, Member) assign roles to clients to give them access to different level of commands.
-- **Multiple Groups Support**, make bot respond to multiple groups by using just one instance of the bot.
-- **Command and Features**, add your own command to the bot by writing one simple class.
-- **Database, save, access**, manage data required by the bot.
+Some features (from Supbot Group API) are removed in Supbot Personal temporarily.
+- **Multiple Chat Support**, make bot respond to multiple chats by using just one instance of the bot.
 - **Schedule**, schedule different task to be performed at specific time or repeat specific interval of time.
 - **Console Command**, manage the bot using your own build console commands and the inbuild ones too.
 - **ChatProcessor**, control the lower level of the API using ChatProcessor.
@@ -51,16 +45,15 @@ Make sure Google Chrome is updated.
 Check out the [video tutorial series](https://www.youtube.com/playlist?list=PLdeajH45r2EKfD4lB6LJW6jF66PLSFGFa) or read the JavaDocs in the source files.<br/>
 
 ### Roadmap
-Development for Supbot API has finished (Since 3 months), but as developers using the API request new features or some bad design in the bot is noticed, I will try my best to add/change it in the bot. 
+- Remove Role system
+- Add persistance (using Serialization)
+- Commands and Features
 
 ### How to contribute?
 You can contribute this project by,
 - Using the the API and creating issue when any bug is encountered.
 - Helping me in the development by bug squashing or developing new features. (If you want to do this, contact me so that we can collaborate.)
 - Let me know if you have any good feature ideas.
-
-### Whats new
-Check out [changes](https://github.com/adsau59/supbot/blob/master/changes) in the repository.
 
 ### Contact
 If you have any problems or you want to contact me for feature ideas or want to collaborate in development you can contact me on [DefineX Community discord server](https://discord.gg/V6e2fpc).

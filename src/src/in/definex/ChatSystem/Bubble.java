@@ -2,7 +2,6 @@ package in.definex.ChatSystem;
 
 import in.definex.Bot;
 import in.definex.Console.Log;
-import in.definex.String.Strings;
 import in.definex.String.XPaths;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -60,33 +59,15 @@ public class Bubble {
 
     /**
      * Get name of the author of the message
+     * must be on the current client
      *
-     * @param bubbles all the chatitems from which the bubble belongs
      * @return authon name
      */
-    public String getAuthor(List<Bubble> bubbles){
-
+    public String getAuthor(){
         if(author == null)
-            for(int i = bubbles.indexOf(this); i>=0; i--)
-                if (doesHaveAuthorName(bubbles.get(i).webElement))
-                    author = bubbles.get(i).webElement.findElement(By.xpath(XPaths.bubbleToAuthorName)).getText();
+        author = Bot.getWebDriver().findElement(By.xpath(XPaths.authorName)).getText();
 
         return author;
-    }
-
-    /**
-     * if author is null, tries to find the author from its own bubble,
-     * if not found return null
-     *
-     * @return author name
-     */
-    public String getAuthorFromMyBubble(){
-
-        if(author == null && doesHaveAuthorName(webElement))
-            author = webElement.findElement(By.xpath(XPaths.bubbleToAuthorName)).getText();
-
-        return author;
-
     }
 
 
@@ -108,17 +89,6 @@ public class Bubble {
         return bubbles;
 
     }
-
-    /**
-     * Checks if the bubble have an authorname.
-     *
-     * @param bubble bubble webelement.
-     * @return true if the bubble have author name.
-     */
-    private static boolean doesHaveAuthorName(WebElement bubble){
-        return bubble.findElements(By.xpath(XPaths.bubbleToAuthorName)).size() != 0;
-    }
-
     /**
      * Web element getter
      * @return bubble webelement

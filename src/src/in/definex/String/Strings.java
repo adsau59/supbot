@@ -1,6 +1,5 @@
 package in.definex.String;
 
-import in.definex.Feature.Help.HelpCommandCommand;
 
 /**
  * Strings
@@ -14,7 +13,6 @@ public class Strings {
     public static String titlePrefix = ";;";
     public static final String dbListSeperator = ",";
 
-    public static final String inCorrectArguments = "Incorrect Arguments.\nUsage:\n%s\nUse \n"+commandPrefix+HelpCommandCommand.name+" %s\nto learn more about the command.";
     public static final String inSufficiantPermission = "You don't have Sufficiant Permission.";
 
     public static final String commandDoesntExists = "Command doesnt exists";

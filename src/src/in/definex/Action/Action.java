@@ -46,6 +46,6 @@ public abstract class Action {
     /**
      * Task performed by the Action
      */
-    public abstract boolean task();
+    protected abstract boolean task();
 
 }

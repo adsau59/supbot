@@ -10,6 +10,7 @@ import org.apache.http.annotation.Experimental;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * SendMessageAction
@@ -59,7 +60,11 @@ public class SendMessageAction extends Action {
         if(phoneRegex != null)
             text = Utils.ConvertNumberToTag(text, phoneRegex);
 
-        chatBox.sendKeys(text);
+        new Actions(Bot.getWebDriver())
+                .moveToElement(chatBox)
+                .click()
+                .sendKeys(text)
+                .build().perform();
 
         Log.d("Sending",text);
 

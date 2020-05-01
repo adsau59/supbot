@@ -1,4 +1,5 @@
 # Supbot
+This project has been deprecated, checkout [Supbot2](https://github.com/adsau59/supbot2), for more details 
 
 <div align="center">
   <img src="https://cdn.steemitimages.com/DQmVfVL98g7QbEyb4t4bt5A9DuMZLBYpiekwceBswjSUqTJ/small%20banner.jpg"/>
